@@ -1,7 +1,10 @@
+from sre_parse import Verbose
+from tabnanny import verbose
 import time
 import pickle
 import os
 import pandas as pd
+from datetime import date
 import logging
 
 logging.basicConfig(filename='cto_trainee_matching_log.log', level=logging.DEBUG,format='%(asctime)s %(levelname)s %(name)s %(message)s',force=True)
@@ -301,7 +304,7 @@ def match_trainee_to_any(trainee, discipline):
     return matches, cto_matches
 
 def startup():
-    choice = int(input('What would you like to do?\n1 = Create new employee\n2 = Match Trainee to CTO on any shift\n3 = Remove employee\n4 = Toggle CTO assignment\n8 = Print existing employees\n9 = Exit\n'))
+    choice = int(input('What would you like to do?\n1 = Create new employee\n2 = Match Trainee to CTO on any shift\n3 = Remove employee\n4 = Toggle CTO assignment\n8 = Create report of existing employees\n9 = Exit\n'))
     return choice
 
 if __name__ == "__main__":
@@ -432,9 +435,13 @@ if __name__ == "__main__":
                     except (ValueError, KeyError):
                         choice = 0
             if choice == 8:
-                report = pd.DataFrame(columns=['First Name', 'Last Name', 'Shift', 'Schedule', 'Call Taking', 'Police', 'Fire', 'Personality', 'Skill', 'On Break','Assigned'])
+                report = pd.DataFrame()
                 for cto in cto_list:
-                    print(cto)
+                    report = report.append(vars(cto),ignore_index=True)
                 for trainee in trainee_list:
-                    print(trainee)
+                    report = report.append(vars(trainee),ignore_index=True)
+                report.to_excel(f'{date.today()} employee_report.xlsx', verbose=False)
+                print('\nReport created\n')
+                while choice != 0:
+                    choice = int(input('\nEnter 0 to return to main menu\n'))
                 choice = 0

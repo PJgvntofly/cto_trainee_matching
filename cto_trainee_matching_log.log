@@ -6588,3 +6588,108 @@ Schedule: 0 and police
 2022-04-28 16:39:14,986 DEBUG __main__ Comparing shifts: 2 2
 2022-04-28 16:39:14,986 DEBUG __main__ CTO shifts match, checking schedules
 2022-04-28 16:39:15,001 DEBUG __main__ Test Schedule: [0, 1, 1, 2, 2, 1, 1][0, 1, 1, 2, 1, 1, 0]
+2022-04-28 18:55:08,025 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 18:55:08,026 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 321, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 18:55:08,027 DEBUG __main__ Removing 
+2022-04-28 18:55:30,386 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 18:55:30,388 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 321, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 18:55:30,389 DEBUG __main__ Removing 
+2022-04-28 18:55:56,355 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 18:55:56,357 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 321, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 18:55:56,358 DEBUG __main__ Removing 
+2022-04-28 18:58:50,635 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 18:58:50,636 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 322, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 18:58:50,637 DEBUG __main__ Removing 
+2022-04-28 18:59:18,660 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 18:59:18,661 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 322, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 18:59:18,662 DEBUG __main__ Removing 
+2022-04-28 19:03:57,889 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 19:03:57,890 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 322, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 19:03:57,891 DEBUG __main__ Removing 
+2022-04-28 19:04:36,499 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 19:04:36,500 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 322, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 19:04:36,501 DEBUG __main__ Removing 
+2022-04-28 19:05:00,570 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 19:05:00,571 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 322, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 19:05:00,572 DEBUG __main__ Removing 
+2022-04-28 19:07:56,086 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 19:07:56,088 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 322, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 19:07:56,088 DEBUG __main__ Removing 
+2022-04-28 19:12:14,185 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 19:12:14,186 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 322, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 19:12:14,187 DEBUG __main__ Removing 
+2022-04-28 19:12:51,697 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 19:12:51,699 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 322, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 19:12:51,700 DEBUG __main__ Removing 
+2022-04-28 19:14:36,119 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 19:14:36,120 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 322, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 19:14:36,121 DEBUG __main__ Removing 
+2022-04-28 19:15:40,259 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 19:15:40,260 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 322, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 19:15:40,261 DEBUG __main__ Removing 
+2022-04-28 19:17:40,785 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 19:17:40,787 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 324, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 19:17:40,788 DEBUG __main__ Removing 
+2022-04-28 19:19:13,909 DEBUG __main__ Initializing employees ['TestTrainee\n', 'DocktorAaron\n', 'GreenAllie\n', 'BaroumesMarshaine\n', 'ArnoldSimon\n', 'BondDevin\n', 'BruceMark\n', 'CarsonTerri\n', 'MuresanCosmina\n', 'GaringerAshley\n', 'WilsonDerek\n', 'KylanyMonique\n', 'EllingsonSteve\n', 'MacleanMadeline\n', 'ZajacAubry\n', 'EganAlyssa\n', '\n']
+2022-04-28 19:19:13,911 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 324, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-04-28 19:19:13,912 DEBUG __main__ Removing 
