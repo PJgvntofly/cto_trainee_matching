@@ -1,5 +1,4 @@
-from sre_parse import Verbose
-from tabnanny import verbose
+from random import triangular
 import time
 import pickle
 import os
@@ -11,37 +10,36 @@ logging.basicConfig(filename='cto_trainee_matching_log.log', level=logging.DEBUG
 logger=logging.getLogger(__name__)
 
 schedules = {}
-schedules[12] = {}
-schedules[8] = {}
-schedules[12]['GY01'] = [0,1,1,1,1,0,0,0,1,1,1,0,0,0]
-schedules[12]['GY02'] = [0,1,1,1,1,0,0,0,0,1,1,1,0,0]
-schedules[12]['GY03'] = [0,0,1,1,1,1,0,0,0,1,1,1,0,0]
-schedules[12]['GY04'] = [0,0,1,1,1,1,0,0,0,0,1,1,1,0]
-schedules[12]['GY05'] = [0,0,0,1,1,1,1,0,0,0,1,1,1,0]
-schedules[12]['GY06'] = [0,0,0,1,1,1,1,0,0,0,0,1,1,1]
-schedules[12]['GY07'] = [0,0,0,0,1,1,1,1,0,0,0,1,1,1]
-schedules[12]['GY08'] = [1,0,0,0,0,1,1,1,0,0,0,1,1,1]
-schedules[12]['GY09'] = [1,0,0,0,0,1,1,1,1,0,0,0,1,1]
-schedules[12]['GY10'] = [1,1,0,0,0,0,1,1,1,0,0,0,1,1]
-schedules[12]['GY11'] = [1,1,0,0,0,0,1,1,1,1,0,0,0,1]
-schedules[12]['GY12'] = [1,1,1,0,0,0,0,1,1,1,0,0,0,1]
-schedules[12]['GY13'] = [1,1,1,0,0,0,0,1,1,1,1,0,0,0]
-schedules[12]['GY14'] = [1,1,1,1,0,0,0,0,1,1,1,0,0,0]
-schedules[12]['PS01'] = [0,1,1,1,1,0,0,0,1,1,1,0,0,0]
-schedules[12]['PS02'] = [0,0,1,1,1,1,0,0,0,1,1,1,0,0]
-schedules[12]['PS03'] = [0,0,0,1,1,1,1,0,0,0,1,1,1,0]
-schedules[12]['PS04'] = [0,0,0,0,1,1,1,1,0,0,0,1,1,1]
-schedules[12]['PS05'] = [1,0,0,0,0,1,1,1,0,0,0,1,1,1]
-schedules[12]['PS06'] = [1,1,0,0,0,0,1,1,1,0,0,0,1,1]
-schedules[12]['PS07'] = [1,1,1,0,0,0,0,1,1,1,0,0,0,1]
-schedules[12]['PS08'] = [1,1,1,1,0,0,0,0,1,1,1,0,0,0]
-schedules[8]['SUN-MON'] = [0,0,1,1,1,1,1,0,0,1,1,1,1,1]
-schedules[8]['MON-TUES'] = [1,0,0,1,1,1,1,1,0,0,1,1,1,1]
-schedules[8]['TUES-WED'] = [1,1,0,0,1,1,1,1,1,0,0,1,1,1]
-schedules[8]['WED-THURS'] = [1,1,1,0,0,1,1,1,1,1,0,0,1,1]
-schedules[8]['THURS-FRI'] = [1,1,1,1,0,0,1,1,1,1,1,0,0,1]
-schedules[8]['FRI-SAT'] = [1,1,1,1,1,0,0,1,1,1,1,1,0,0]
-schedules[8]['SAT-SUN'] = [0,1,1,1,1,1,0,0,1,1,1,1,1,0]
+schedules['GY01'] = [0,1,1,1,1,0,0,0,1,1,1,0,0,0]
+schedules['GY02'] = [0,1,1,1,1,0,0,0,0,1,1,1,0,0]
+schedules['GY03'] = [0,0,1,1,1,1,0,0,0,1,1,1,0,0]
+schedules['GY04'] = [0,0,1,1,1,1,0,0,0,0,1,1,1,0]
+schedules['GY05'] = [0,0,0,1,1,1,1,0,0,0,1,1,1,0]
+schedules['GY06'] = [0,0,0,1,1,1,1,0,0,0,0,1,1,1]
+schedules['GY07'] = [0,0,0,0,1,1,1,1,0,0,0,1,1,1]
+schedules['GY08'] = [1,0,0,0,0,1,1,1,0,0,0,1,1,1]
+schedules['GY09'] = [1,0,0,0,0,1,1,1,1,0,0,0,1,1]
+schedules['GY10'] = [1,1,0,0,0,0,1,1,1,0,0,0,1,1]
+schedules['GY11'] = [1,1,0,0,0,0,1,1,1,1,0,0,0,1]
+schedules['GY12'] = [1,1,1,0,0,0,0,1,1,1,0,0,0,1]
+schedules['GY13'] = [1,1,1,0,0,0,0,1,1,1,1,0,0,0]
+schedules['GY14'] = [1,1,1,1,0,0,0,0,1,1,1,0,0,0]
+schedules['PS01'] = [0,1,1,1,1,0,0,0,1,1,1,0,0,0]
+schedules['PS02'] = [0,0,1,1,1,1,0,0,0,1,1,1,0,0]
+schedules['PS03'] = [0,0,0,1,1,1,1,0,0,0,1,1,1,0]
+schedules['PS04'] = [0,0,0,0,1,1,1,1,0,0,0,1,1,1]
+schedules['PS05'] = [1,0,0,0,0,1,1,1,0,0,0,1,1,1]
+schedules['PS06'] = [1,1,0,0,0,0,1,1,1,0,0,0,1,1]
+schedules['PS07'] = [1,1,1,0,0,0,0,1,1,1,0,0,0,1]
+schedules['PS08'] = [1,1,1,1,0,0,0,0,1,1,1,0,0,0]
+schedules['SUN-MON'] = [0,0,1,1,1,1,1,0,0,1,1,1,1,1]
+schedules['MON-TUES'] = [1,0,0,1,1,1,1,1,0,0,1,1,1,1]
+schedules['TUES-WED'] = [1,1,0,0,1,1,1,1,1,0,0,1,1,1]
+schedules['WED-THURS'] = [1,1,1,0,0,1,1,1,1,1,0,0,1,1]
+schedules['THURS-FRI'] = [1,1,1,1,0,0,1,1,1,1,1,0,0,1]
+schedules['FRI-SAT'] = [1,1,1,1,1,0,0,1,1,1,1,1,0,0]
+schedules['SAT-SUN'] = [0,1,1,1,1,1,0,0,1,1,1,1,1,0]
+schedules[0] = []
 
 cto_list = []
 trainee_list = []
@@ -56,15 +54,46 @@ class Employee:
         self.police = police
         self.fire = fire
         self.personality = personality
-    def updateShift(self, newShift):
-        self.shift = newShift
-    def updateSchedule(self, newSchedule):
-        self.schedule = schedules[newSchedule]
-    def updateDisciplines(self, policeUpdate, fireUpdate):
-        if self.police != policeUpdate:
-            self.police == policeUpdate
-        if self.fire != fireUpdate:
-            self.fire = fireUpdate
+    @property
+    def shift(self):
+        logger.debug(f'Getting shift for {self.firstName} {self.lastName}')
+        return self._shift
+    @shift.setter
+    def shift(self, newShift):
+        logger.debug(f'Assigning new shift to {self.firstName} {self.lastName}')
+        self._shift = newShift
+    @property
+    def schedule(self):
+        logger.debug(f'Getting schedule for {self.firstName} {self.lastName}')
+        return self._schedule
+    @schedule.setter
+    def schedule(self, newSchedule):
+        logger.debug(f'Setting schedule to {newSchedule} for {self.firstName} {self.lastName}')
+        self._schedule = newSchedule
+    @property
+    def calltaking(self):
+        logger.debug(f'Getting call taking value for {self.firstName} {self.lastName}')
+        return self._calltaking
+    @calltaking.setter
+    def calltaking(self, newValue):
+        logger.debug(f'Setting call taking value to {newValue} for {self.firstName} {self.lastName}')
+        self._calltaking = newValue
+    @property
+    def police(self):
+        logger.debug(f'Getting police value for {self.firstName} {self.lastName}')
+        return self._police
+    @police.setter
+    def police(self, newValue):
+        logger.debug(f'Setting police value to {newValue} for {self.firstName} {self.lastName}')
+        self._police = newValue
+    @property
+    def fire(self):
+        logger.debug(f'Getting fire value for {self.firstName} {self.lastName}')
+        return self._fire
+    @fire.setter
+    def fire(self, newValue):
+        logger.debug(f'Setting fire value to {newValue} for {self.firstName} {self.lastName}')
+        self._fire = newValue
     def __str__(self):
         return f"Last Name: {self.lastName}, First Name: {self.firstName}\nShift: {self.shift}\nSchedule: {self.schedule}"
 
@@ -76,19 +105,31 @@ class CTO(Employee):
         self.onBreak = onBreak
         self.assigned = assigned
         cto_list.append(self)
-    def toggleBreak(self):
+    @property
+    def onBreak(self):
+        return self._onBreak
+    @onBreak.setter
+    def onBreak(self, newValue):
+        self._onBreak = newValue
+    def toggle_break(self):
+        newValue = 1
         if self.onBreak == 1:
-            self.onBreak = 0
-        else:
-            self.onBreak = 1
+            newValue = 0
+        self.onBreak = newValue
     def updateSkill(self, newSkill):
         self.skill = newSkill
-    def toggleAssigned(self):
+    @property
+    def assigned(self):
+        logger.debug(f'Getting assigned value for {self.firstName} {self.lastName}')
+        return self._assigned
+    @assigned.setter
+    def assigned(self, newValue):
+        logger.debug(f'Setting assigned value to {newValue} for {self.firstName} {self.lastName}')
+        self._assigned = newValue
+    def toggleAssigned(self, newValue):
+        logger.debug(f'Starting toggleAssigned for {self.firstName} {self.lastName}')
         logger.debug(f'Start value assigned: {self.assigned}')
-        if self.assigned == 0:
-            self.assigned == 1
-        else:
-            self.assigned == 0
+        self.assigned = newValue
         logger.debug(f'End value assigned {self.assigned}')
         logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
         employee_name = self.lastName + self.firstName
@@ -112,7 +153,7 @@ def create_employee():
         if selection not in [1,2]:
             raise ValueError
     except ValueError:
-        logging.exception(f'Invalid selection. Entered value was {selection}.')
+        logger.exception(f'Invalid selection. Entered value was {selection}.')
         print('Please enter only 1 or 2')
         return 0
     first_name = input('Enter their first name.\n').strip().title()
@@ -124,17 +165,18 @@ def create_employee():
         except ValueError:
             print('Please enter only 0, 1, 2, or 3.\n')
             time.sleep(2)
-    schedule = input('Enter their assigned schedule.\nFor CTOs, enter their assigned position (i.e. GY01)\nFor trainees enter their days off (i.e. Mon-Tues)\nIf no assigned schedule, enter 0\n').upper()
+    schedule = input('Enter their assigned schedule.\nFor CTOs, enter their assigned position (i.e. GY01)\nFor trainees enter their days off (i.e. Mon-Tues)\nIf no assigned schedule, enter 0\n').upper().strip()
     if schedule[:2] == 'DS':
         schedule = schedule.replace('DS','GY')
+        logger.debug(f'Entered schedule: {schedule}')
     calltaking = int(input('Are they signed off on call taking?\nEnter 1 for Yes and 0 for No.\n'))
     if calltaking == 1:
-        police = int(input('Are they signed off on police?\nEnter 1 for Yes and 0 for No.\n'))
-        fire = int(input('Are they signed off on fire?\nEnter 1 for Yes and 0 for No.\n'))
+        police = int(input('Are they signed off on police?\nEnter 1 for Yes and 0 for No.\n').strip())
+        fire = int(input('Are they signed off on fire?\nEnter 1 for Yes and 0 for No.\n').strip())
     else:
         police = 0
         fire = 0
-    personality = input('Enter their personality type.\n').lower()
+    personality = input('Enter their personality type.\n').lower().strip()
     if selection == 1:
         partTime = int(input('Are they a fill in CTO or part time employee?\nEnter 1 for Yes and 0 for No.\n'))
         skill = int(input('Enter their CTO skill level.\n1 = Lower skill/experience\n2 = Normal\n3 = Skilled/Highly Experienced\n'))
@@ -142,17 +184,17 @@ def create_employee():
         onBreak = 0
         cto_name = last_name + first_name[0]
         try:
-            schedule = schedules[12][schedule]
+            schedule = schedules[schedule]
         except KeyError as err:
             logger.exception(err)
             schedule = 0
-        cto_name = CTO(first_name,last_name,shift,schedule,calltaking,police,fire,personality,partTime,skill,onBreak, assigned)
+        cto_name = CTO(first_name,last_name,shift,schedule,calltaking,police,fire,personality,partTime,skill,onBreak,assigned)
         return cto_name
     if selection == 2:
         minSkill = int(input('Enter the required minimum skill level for their assigned CTOs.\n1 = Lower skill/experience\n2 = Normal\n3 = Skilled/Highly Experienced\n'))
         trainee_name = last_name + first_name[0]
         try:
-            schedule = schedules[8][schedule]
+            schedule = schedules[schedule]
         except KeyError as err:
             logger.exception(err)
             schedule = 0
@@ -160,7 +202,7 @@ def create_employee():
         return trainee_name
 
 def match_trainee_to_any(trainee, discipline):
-    logger.debug(f'Starting match_trainee_to_any with inputs {trainee} and {discipline}')
+    logger.debug(f'Starting match_trainee_to_any with inputs:\n {trainee} and {discipline}\n')
     options = []
     ideal_list = []
     last_choice = []
@@ -179,6 +221,8 @@ def match_trainee_to_any(trainee, discipline):
                 options.append(cto)
             else:
                 last_choice.append(cto)
+    if len(ideal_list) == 0 and len(options) == 0 and len(last_choice) == 0:
+        return f'No matches found for {trainee.firstName} {trainee.lastName}'
     if len(ideal_list) > 1:
         for cto in ideal_list:
             logger.debug(f'Checking ideal list CTO {cto.firstName} {cto.lastName}')
@@ -365,33 +409,40 @@ if __name__ == "__main__":
                     logger.exception(f'Invalid trainee selection:\n{err}')
                     print('Please select a valid number')
                     choice = 0
-                training_discipline = input('Which discipline?\n').lower().strip()
+                training_discipline = int(input('Which discipline?\n1 = Call Taking\n2 = Police\n3 = Fire\n').strip())
                 try:
-                    if training_discipline == 'call taking':
-                        training_discipline = 'calltaking'
-                    if training_discipline not in ['calltaking', 'police','fire']:
-                        raise ValueError
-                except ValueError:
+                    disciplines = ['calltaking', 'police', 'fire']
+                    training_discipline = disciplines[training_discipline - 1]
+                except (ValueError, KeyError):
                     logger.exception(f'Invalid discipline entered. Input was: {training_discipline}')
                 matches = match_trainee_to_any(trainee, training_discipline)
-                print(f'\nShowing matches for {trainee.firstName} {trainee.lastName}:\n')
-                for index, match in enumerate(matches[0]):
-                    print(f'{index} - {match}')
-                selected_match = input('\nSelect match to mark CTOs as unavailable.\nTo keep CTOs available for other matches, enter q\n')
-                logger.debug(f'Selected match: {selected_match}')
-                try:
-                    selected_match = int(selected_match)
-                    selected_match = matches[0][selected_match]
-                    cto_matches = matches[1]
-                    logger.debug(f'cto_matches list: {cto_matches}')
-                    cto_matches = cto_matches[selected_match]
-                    logger.debug(f'Toggling CTOs to assigned: {cto_matches}')
-                    for match in cto_matches:
-                        match.toggleAssigned()
-                        print(f'{cto.first_name} {cto.last_name} marked as assigned')
+                if isinstance(matches, str):
+                    print('\n'+matches+'\n')
+                    time.sleep(1)
                     choice = 0
-                except (ValueError, KeyError):
-                    choice = 0
+                else:
+                    print(f'\nShowing matches for {trainee.firstName} {trainee.lastName}:\n')
+                    for index, match in enumerate(matches[0]):
+                        print(f'{index} - {match}')
+                    selected_match = input('\nSelect match to mark CTOs as unavailable.\nTo keep CTOs available for other matches, enter q\n')
+                    logger.debug(f'Selected match: {selected_match}')
+                    try:
+                        selected_match = int(selected_match)
+                        selected_match = matches[0][selected_match]
+                        cto_matches = matches[1]
+                        logger.debug(f'cto_matches list: {cto_matches}')
+                        cto_matches = cto_matches[selected_match]
+                        logger.debug(f'Toggling CTOs to assigned: {cto_matches}')
+                        for match in cto_matches:
+                            match.toggleAssigned(1)
+                            print(f'\n{match.firstName} {match.lastName} marked as assigned\n')
+                        time.sleep(1)
+                        choice = 0
+                    except (ValueError, KeyError, IndexError) as err:
+                        logger.exception(err)
+                        print('Invalid selection, returning to main menu\n\n')
+                        time.sleep(.5)
+                        choice = 0
             if choice ==3:
                 print('Choose which employee to delete:\n')
                 for index, name in enumerate(loaded_list):
@@ -418,9 +469,14 @@ if __name__ == "__main__":
                         print(f'{index}: {name.firstName} {name.lastName}')
                 selection = input('\nSelect CTO to toggle.\nTo view unassigned CTOs, enter q\n')
                 try:
+                    newValue = 0
                     selection = int(selection)
                     selection = cto_list[selection]
-                    selection.toggleAssigned()
+                    if selection.assigned == 0:
+                            newValue = 1
+                    selection.toggleAssigned(newValue)
+                    print(f'\nSuccessfully toggled assignment for CTO {selection.firstName} {selection.lastName}\n')
+                    time.sleep(1)
                     choice = 0
                 except (ValueError, KeyError):
                     for index, name in enumerate(cto_list):
@@ -428,19 +484,26 @@ if __name__ == "__main__":
                             print(f'{index}: {name.firstName} {name.lastName}')
                     selection = input('\nSelect CTO to toggle.\nTo return to main menu, enter q\n')
                     try:
+                        newValue = 0
                         selection = int(selection)
                         selection = cto_list[selection]
-                        selection.toggleAssigned()
+                        if selection.assigned == 0:
+                            newValue = 1
+                        selection.toggleAssigned(newValue)
+                        print(f'\nSuccessfully toggled assignment for CTO {selection.firstName} {selection.lastName}\n')
+                        time.sleep(1)
                         choice = 0
                     except (ValueError, KeyError):
                         choice = 0
             if choice == 8:
+                print(cto_list)
+                print(trainee_list)
                 report = pd.DataFrame()
                 for cto in cto_list:
                     report = report.append(vars(cto),ignore_index=True)
                 for trainee in trainee_list:
                     report = report.append(vars(trainee),ignore_index=True)
-                report.to_excel(f'{date.today()} employee_report.xlsx', verbose=False)
+                report.to_excel(f'{date.today()} employee_report.xlsx')
                 print('\nReport created\n')
                 while choice != 0:
                     choice = int(input('\nEnter 0 to return to main menu\n'))
