@@ -3561,3 +3561,67 @@ Schedule: [] and police
 2022-05-01 15:59:49,046 DEBUG __main__ Getting assigned value for Second Test-Cto
 2022-05-01 15:59:49,046 DEBUG __main__ End value assigned 1
 2022-05-01 15:59:49,047 DEBUG __main__ Updating pickle file for Second Test-Cto
+2022-05-01 21:11:56,976 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:12:19,395 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:12:31,019 ERROR __main__ Invalid discipline entered. Input was: 4
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 415, in <module>
+    training_discipline = disciplines[training_discipline - 1]
+IndexError: list index out of range
+2022-05-01 21:12:31,523 DEBUG __main__ Getting shift for Test Trainee
+2022-05-01 21:12:31,523 DEBUG __main__ Getting schedule for Test Trainee
+2022-05-01 21:12:31,523 DEBUG __main__ Starting match_trainee_to_any with inputs:
+ Last Name: Trainee, First Name: Test
+Shift: 1
+Schedule: [] and 4
+
+2022-05-01 21:12:31,523 DEBUG __main__ Considering CTO Test Cto
+2022-05-01 21:12:58,605 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:21:22,182 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:21:35,820 DEBUG __main__ Getting assigned value for Test Cto
+2022-05-01 21:21:35,820 DEBUG __main__ Getting assigned value for Second Test-Cto
+2022-05-01 21:21:40,731 DEBUG __main__ Getting assigned value for Test Cto
+2022-05-01 21:21:40,731 DEBUG __main__ Getting assigned value for Second Test-Cto
+2022-05-01 21:23:29,042 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:29:06,295 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:29:48,117 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:30:26,451 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:30:35,051 DEBUG __main__ Assigning new shift to Test Trainee
+2022-05-01 21:32:33,476 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:32:42,795 DEBUG __main__ Assigning new shift to Test Trainee
+2022-05-01 21:36:15,511 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:38:11,798 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:38:19,266 ERROR __main__ Error occured while selecting employee. Entered value was 3
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 492, in <module>
+    emp_selection = loaded_list[emp_selection]
+IndexError: list index out of range
+2022-05-01 21:39:10,789 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:39:15,330 ERROR __main__ Error occured while selecting employee. Entered value was 3
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 492, in <module>
+    emp_selection = loaded_list[emp_selection]
+IndexError: list index out of range
+2022-05-01 21:39:49,152 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:39:54,578 ERROR __main__ Error occured while selecting employee. Entered value was 3
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 492, in <module>
+    emp_selection = loaded_list[emp_selection]
+IndexError: list index out of range
+2022-05-01 21:40:20,820 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:40:27,778 ERROR __main__ Error occurred while updating employee shift. Please enter only 1, 2, or 3
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 501, in <module>
+    raise ValueError('Please enter only 1, 2, or 3')
+ValueError: Please enter only 1, 2, or 3
+2022-05-01 21:46:05,301 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:46:18,346 ERROR __main__ Invalid entry while updating employee shift: DS02
+'DS02'
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 525, in <module>
+    emp_selection.schedule = schedules[new_schedule]
+KeyError: 'DS02'
+2022-05-01 21:47:49,303 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:48:05,259 DEBUG __main__ Setting schedule to [0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, 0, 0] for Test Cto
+2022-05-01 21:49:16,576 DEBUG __main__ Initializing employees ['TraineeTest\n', 'CtoTest\n', 'Test-CtoSecond\n']
+2022-05-01 21:49:25,875 DEBUG __main__ Setting schedule to [0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, 0, 0, 0] for Test Cto

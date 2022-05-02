@@ -210,7 +210,6 @@ def match_trainee_to_any(trainee, discipline):
     cto_matches = {}
     for cto in cto_list:
         logger.debug(f'Considering CTO {cto.firstName} {cto.lastName}')
-        logger.debug(f'{getattr(cto,discipline)}')
         if cto.assigned == 0 and getattr(cto,discipline) == 1:
             logger.debug(f'Matches discipline: {cto.firstName} {cto.lastName}')
             if cto.skill >= trainee.minSkill and cto.personality == trainee.personality:
@@ -348,7 +347,7 @@ def match_trainee_to_any(trainee, discipline):
     return matches, cto_matches
 
 def startup():
-    choice = int(input('What would you like to do?\n1 = Create new employee\n2 = Match Trainee to CTO on any shift\n3 = Remove employee\n4 = Toggle CTO assignment\n8 = Create report of existing employees\n9 = Exit\n'))
+    choice = int(input('\nWhat would you like to do?\n1 = Create New Employee\n2 = Match Trainee to CTO on any Shift\n3 = Update Employee\n8 = Create Report of Existing Employees\n9 = Exit\n'))
     return choice
 
 if __name__ == "__main__":
@@ -399,7 +398,7 @@ if __name__ == "__main__":
             if choice == 9:
                 exit()
             if choice == 2:
-                print('Which Trainee?\n')
+                print('\nWhich Trainee?\n')
                 for index, name in enumerate(trainee_list):
                     print(f'{index} {name.firstName} {name.lastName}')
                 trainee = int(input('\nEnter the corresponding number\n'))
@@ -409,12 +408,15 @@ if __name__ == "__main__":
                     logger.exception(f'Invalid trainee selection:\n{err}')
                     print('Please select a valid number')
                     choice = 0
-                training_discipline = int(input('Which discipline?\n1 = Call Taking\n2 = Police\n3 = Fire\n').strip())
+                training_discipline = int(input('\nWhich discipline?\n1 = Call Taking\n2 = Police\n3 = Fire\n').strip())
                 try:
                     disciplines = ['calltaking', 'police', 'fire']
                     training_discipline = disciplines[training_discipline - 1]
-                except (ValueError, KeyError):
+                except (ValueError, IndexError):
                     logger.exception(f'Invalid discipline entered. Input was: {training_discipline}')
+                    print(f'{training_discipline} is not valid. Please enter a number between 1 and 3.\nReturning to main menu\n')
+                    time.sleep(.5)
+                    choice = 0
                 matches = match_trainee_to_any(trainee, training_discipline)
                 if isinstance(matches, str):
                     print('\n'+matches+'\n')
@@ -440,60 +442,117 @@ if __name__ == "__main__":
                         choice = 0
                     except (ValueError, KeyError, IndexError) as err:
                         logger.exception(err)
-                        print('Invalid selection, returning to main menu\n\n')
+                        print('\nInvalid selection, returning to main menu\n\n')
                         time.sleep(.5)
                         choice = 0
             if choice ==3:
-                print('Choose which employee to delete:\n')
-                for index, name in enumerate(loaded_list):
-                    print(f'{index} {name.firstName} {name.lastName}')
-                selection = int(input('Enter the corresponding number\n'))
-                employee = loaded_list[selection]
-                employee_name = employee.lastName + employee.firstName
-                try:
-                    os.remove(employee_name)
-                except Exception as err:
-                    logger.exception(f'Error occured while attempting to delete pickle file:\n{err}')
-                    print('Unable to delete pickle file')
-                employee_list.pop(selection)
-                if isinstance(employee, CTO):
-                    cto_list.remove(employee)
-                if isinstance(employee, Trainee):
-                    trainee_list.remove(employee)
-                del employee
-                choice = 0
-            if choice == 4:
-                print('Currently assigned CTOs:\n')
-                for index, name in enumerate(cto_list):
-                    if name.assigned == 1:
-                        print(f'{index}: {name.firstName} {name.lastName}')
-                selection = input('\nSelect CTO to toggle.\nTo view unassigned CTOs, enter q\n')
-                try:
-                    newValue = 0
-                    selection = int(selection)
-                    selection = cto_list[selection]
-                    if selection.assigned == 0:
-                            newValue = 1
-                    selection.toggleAssigned(newValue)
-                    print(f'\nSuccessfully toggled assignment for CTO {selection.firstName} {selection.lastName}\n')
-                    time.sleep(1)
-                    choice = 0
-                except (ValueError, KeyError):
-                    for index, name in enumerate(cto_list):
-                        if name.assigned == 0:
-                            print(f'{index}: {name.firstName} {name.lastName}')
-                    selection = input('\nSelect CTO to toggle.\nTo return to main menu, enter q\n')
-                    try:
-                        newValue = 0
-                        selection = int(selection)
-                        selection = cto_list[selection]
-                        if selection.assigned == 0:
-                            newValue = 1
-                        selection.toggleAssigned(newValue)
-                        print(f'\nSuccessfully toggled assignment for CTO {selection.firstName} {selection.lastName}\n')
-                        time.sleep(1)
+                update_choice = 0
+                while update_choice == 0:
+                    print('\nUpdate Employee:\n')
+                    update_choice = int(input('1 = Toggle CTO assigned setting\n2 = Update Employee Shift\n3 = Update Employee Schedule\n5 = Toggle CTO break status\n6 = Update Trainee Minimum Skill\n7 = Delete Employee\n9 = Main Menu\n'))
+                    if update_choice == 1:
+                        print('Currently assigned CTOs:\n')
+                        for index, name in enumerate(cto_list):
+                            if name.assigned == 1:
+                                print(f'{index}: {name.firstName} {name.lastName}')
+                        selection = input('\nSelect CTO to toggle.\nTo view unassigned CTOs, enter q\n')
+                        try:
+                            newValue = 0
+                            selection = int(selection)
+                            selection = cto_list[selection]
+                            if selection.assigned == 0:
+                                    newValue = 1
+                            selection.toggleAssigned(newValue)
+                            print(f'\nSuccessfully toggled assignment for CTO {selection.firstName} {selection.lastName}\n')
+                            time.sleep(1)
+                            choice = 0
+                        except (ValueError, KeyError):
+                            for index, name in enumerate(cto_list):
+                                if name.assigned == 0:
+                                    print(f'{index}: {name.firstName} {name.lastName}')
+                            selection = input('\nSelect CTO to toggle.\nTo return to main menu, enter q\n')
+                            try:
+                                newValue = 0
+                                selection = int(selection)
+                                selection = cto_list[selection]
+                                if selection.assigned == 0:
+                                    newValue = 1
+                                selection.toggleAssigned(newValue)
+                                print(f'\nSuccessfully toggled assignment for CTO {selection.firstName} {selection.lastName}\n')
+                                time.sleep(1)
+                                choice = 0
+                            except (ValueError, KeyError):
+                                choice = 0
+                    if update_choice == 2:
+                        print('\nUpdate Employee Shift:\n')
+                        for index, employee in enumerate(loaded_list):
+                            print(f'{index}: {employee.firstName} {employee.lastName}')
+                        emp_selection = int(input('\nSelect employee to update.\n'))
+                        try:
+                            emp_selection = loaded_list[emp_selection]
+                        except IndexError as err:
+                            logger.exception(f'Error occured while selecting employee. Entered value was {emp_selection}')
+                            print('\nInvalid selection\n')
+                            time.sleep(.5)
+                            break
+                        try:
+                            new_shift = int(input(f'\nEnter new shift for {emp_selection.firstName} {emp_selection.lastName}:\nDays = 1\nGraves = 2\nPower = 3\nIf none, enter 0\n'))
+                            if new_shift not in [1,2,3]:
+                                raise ValueError('Please enter only 0, 1, 2, or 3')
+                        except ValueError as err:
+                            logger.exception(f'Error occurred while updating employee shift. {err}')
+                            print(f'\n{err}\n')
+                            time.sleep(.5)
+                            break
+                        emp_selection.shift = new_shift
+                        print('\nShift updated successfully\n')
+                        time.sleep(.5)
+                        update_choice = 0
+                    if update_choice == 3:
+                        print('\nUpdate Employee Schedule:\n')
+                        for index, employee in enumerate(loaded_list):
+                            print(f'{index}: {employee.firstName} {employee.lastName}')
+                        emp_selection = int(input('\nSelect employee to update.\n'))
+                        try:
+                            emp_selection = loaded_list[emp_selection]
+                        except IndexError as err:
+                            logger.exception(f'Error occured while selecting employee. Entered value was {emp_selection}')
+                            print('\nInvalid selection\n')
+                            time.sleep(.5)
+                            break 
+                        try:
+                            new_schedule = input(f'\nEnter new schedule for {emp_selection.firstName} {emp_selection.lastName}:\nFor CTOs, enter their assigned position (i.e. GY01)\nFor trainees enter their days off (i.e. Mon-Tues)\nIf no assigned schedule, enter 0\n').strip().upper()
+                            if new_schedule[:2] == 'DS':
+                                new_schedule = new_schedule.replace('DS','GY')
+                            emp_selection.schedule = schedules[new_schedule]
+                            print(f'\nSuccessfully updated schedule for {emp_selection.firstName} {emp_selection.lastName}\n')
+                            time.sleep(1)
+                            update_choice = 0
+                        except KeyError as err:
+                            logger.exception(f'Invalid entry while updating employee shift: {new_schedule}\n{err}')
+                            print('Invalid entry')
+                            time.sleep(.5)
+                            break
+                    if update_choice == 7:
+                        print('Choose which employee to delete:\n')
+                        for index, name in enumerate(loaded_list):
+                            print(f'{index} {name.firstName} {name.lastName}')
+                        selection = int(input('Enter the corresponding number\n'))
+                        employee = loaded_list[selection]
+                        employee_name = employee.lastName + employee.firstName
+                        try:
+                            os.remove(employee_name)
+                        except Exception as err:
+                            logger.exception(f'Error occured while attempting to delete pickle file:\n{err}')
+                            print('Unable to delete pickle file')
+                        employee_list.pop(selection)
+                        if isinstance(employee, CTO):
+                            cto_list.remove(employee)
+                        if isinstance(employee, Trainee):
+                            trainee_list.remove(employee)
+                        del employee
                         choice = 0
-                    except (ValueError, KeyError):
+                    if update_choice == 9:
                         choice = 0
             if choice == 8:
                 print(cto_list)
