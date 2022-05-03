@@ -219,10 +219,10 @@ def match_trainee_to_any(trainee, discipline):
         logger.debug(f'Considering CTO {cto.firstName} {cto.lastName}')
         if cto.assigned == 0 and getattr(cto,discipline) == 1:
             logger.debug(f'Matches discipline: {cto.firstName} {cto.lastName}')
-            if cto.skill >= trainee.minSkill and cto.personality == trainee.personality:
+            if cto.skill >= trainee.minSkill and cto.personality == trainee.personality and cto.onBreak == 0:
                 logger.debug(f'Adding {cto.firstName} {cto.lastName} to ideal list')
                 ideal_list.append(cto)
-            elif cto.skill >= trainee.minSkill:
+            elif cto.skill >= trainee.minSkill and cto.onBreak == 0:
                 logger.debug(f'Adding {cto.firstName} {cto.lastName} to options list')
                 options.append(cto)
             else:
@@ -314,7 +314,7 @@ def match_trainee_to_any(trainee, discipline):
     for option in options:
         logger.debug(f'Checking non-ideal CTO {option.firstName} {option.lastName}')
         schedule1 = option.schedule
-        cto_shift = cto.shift
+        cto_shift = option.shift
         for second in cto_list:
             logger.debug(f'Checking CTO {second.firstName} {second.lastName}')
             logger.debug(f'Comparing shifts: {cto_shift} {second.shift}')
