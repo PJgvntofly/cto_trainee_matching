@@ -1,4 +1,3 @@
-from random import triangular
 import time
 import pickle
 import os
@@ -189,7 +188,7 @@ def create_employee():
         partTime = int(input('Are they a fill in CTO or currently on a break?\nEnter 1 for Yes and 0 for No.\n'))
         skill = int(input('Enter their CTO skill level.\n1 = Lower skill/experience\n2 = Normal\n3 = Skilled/Highly Experienced\n'))
         assigned = int(input('Are they currently assigned a trainee?\nEnter 1 for Yes and 0 for No.\n'))
-        onBreak = 0
+        onBreak = partTime
         cto_name = last_name + first_name[0]
         try:
             schedule = schedules[schedule]
@@ -460,7 +459,7 @@ if __name__ == "__main__":
                 update_choice = 0
                 while update_choice == 0:
                     print('\nUpdate Employee:\n')
-                    update_choice = int(input('1 = Toggle CTO assigned setting\n2 = Update Employee Shift\n3 = Update Employee Schedule\n4 = Toggle CTO break status\n5 = Update Trainee Minimum Skill\n6 = Delete Employee\n9 = Main Menu\n'))
+                    update_choice = int(input('1 = Toggle CTO assigned setting\n2 = Update Employee Shift\n3 = Update Employee Schedule\n4 = Toggle CTO Break Status\n5 = Update Trainee Minimum Skill\n6 = Delete Employee\n9 = Main Menu\n'))
                     if update_choice == 1:
                         logger.debug('Toggle CTO assigned value selected')
                         print('Currently assigned CTOs:\n')
@@ -600,10 +599,11 @@ if __name__ == "__main__":
                                 print('Unable to delete pickle file')
                             employee_list.pop(selection)
                         except (IndexError, ValueError) as err:
-                            logger.exception(f'Invalid selection while deleting employee. Selection was {selection}')
+                            logger.exception(f'Invalid selection while deleting employee.')
                             print('Invalid selection')
                             time.sleep(.5)
                             break
+                        loaded_list.remove(employee)
                         if isinstance(employee, CTO):
                             cto_list.remove(employee)
                         if isinstance(employee, Trainee):
