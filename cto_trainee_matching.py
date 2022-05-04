@@ -61,6 +61,11 @@ class Employee:
     def shift(self, newShift):
         logger.debug(f'Assigning new shift to {self.firstName} {self.lastName}')
         self._shift = newShift
+        logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
+        employee_name = self.lastName + self.firstName
+        file = open(employee_name, 'wb')
+        pickle.dump(self, file)
+        file.close()
     @property
     def schedule(self):
         logger.debug(f'Getting schedule for {self.firstName} {self.lastName}')
@@ -69,6 +74,11 @@ class Employee:
     def schedule(self, newSchedule):
         logger.debug(f'Setting schedule to {newSchedule} for {self.firstName} {self.lastName}')
         self._schedule = newSchedule
+        logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
+        employee_name = self.lastName + self.firstName
+        file = open(employee_name, 'wb')
+        pickle.dump(self, file)
+        file.close()
     @property
     def calltaking(self):
         logger.debug(f'Getting call taking value for {self.firstName} {self.lastName}')
@@ -77,6 +87,11 @@ class Employee:
     def calltaking(self, newValue):
         logger.debug(f'Setting call taking value to {newValue} for {self.firstName} {self.lastName}')
         self._calltaking = newValue
+        logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
+        employee_name = self.lastName + self.firstName
+        file = open(employee_name, 'wb')
+        pickle.dump(self, file)
+        file.close()
     @property
     def police(self):
         logger.debug(f'Getting police value for {self.firstName} {self.lastName}')
@@ -85,6 +100,11 @@ class Employee:
     def police(self, newValue):
         logger.debug(f'Setting police value to {newValue} for {self.firstName} {self.lastName}')
         self._police = newValue
+        logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
+        employee_name = self.lastName + self.firstName
+        file = open(employee_name, 'wb')
+        pickle.dump(self, file)
+        file.close()
     @property
     def fire(self):
         logger.debug(f'Getting fire value for {self.firstName} {self.lastName}')
@@ -93,6 +113,24 @@ class Employee:
     def fire(self, newValue):
         logger.debug(f'Setting fire value to {newValue} for {self.firstName} {self.lastName}')
         self._fire = newValue
+        logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
+        employee_name = self.lastName + self.firstName
+        file = open(employee_name, 'wb')
+        pickle.dump(self, file)
+        file.close()
+    @property
+    def personality(self):
+        logger.debug(f'Getting personality for {self.firstName} {self.lastName}')
+        return self._personality
+    @personality.setter
+    def personality(self, newValue):
+        logger.debug(f'Setting personality to {newValue} for {self.firstName} {self.lastName}')
+        self._personality = newValue
+        logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
+        employee_name = self.lastName + self.firstName
+        file = open(employee_name, 'wb')
+        pickle.dump(self, file)
+        file.close()
     def __str__(self):
         return f"Last Name: {self.lastName}, First Name: {self.firstName}\nShift: {self.shift}\nSchedule: {self.schedule}"
 
@@ -111,6 +149,11 @@ class CTO(Employee):
     @onBreak.setter
     def onBreak(self, newValue):
         self._onBreak = newValue
+        logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
+        employee_name = self.lastName + self.firstName
+        file = open(employee_name, 'wb')
+        pickle.dump(self, file)
+        file.close()
     def toggle_break(self):
         newValue = 1
         if self.onBreak == 1:
@@ -118,6 +161,11 @@ class CTO(Employee):
         self.onBreak = newValue
     def updateSkill(self, newSkill):
         self.skill = newSkill
+        logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
+        employee_name = self.lastName + self.firstName
+        file = open(employee_name, 'wb')
+        pickle.dump(self, file)
+        file.close()
     @property
     def assigned(self):
         logger.debug(f'Getting assigned value for {self.firstName} {self.lastName}')
@@ -151,6 +199,11 @@ class Trainee(Employee):
     def minSkill(self, newValue):
         logger.debug(f'Setting new minSkill value to {newValue} for {self.firstName} {self.lastName}')
         self._minSkill = newValue
+        logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
+        employee_name = self.lastName + self.firstName
+        file = open(employee_name, 'wb')
+        pickle.dump(self, file)
+        file.close()
 
 def create_employee():
     logger.debug('Starting create_employee')
@@ -419,47 +472,48 @@ if __name__ == "__main__":
                 try:
                     disciplines = ['calltaking', 'police', 'fire']
                     training_discipline = disciplines[training_discipline - 1]
+                    matches = match_trainee_to_any(trainee, training_discipline)
+                    if isinstance(matches, str):
+                        print('\n'+matches+'\n')
+                        time.sleep(1)
+                        choice = 0
+                    else:
+                        print(f'\nShowing matches for {trainee.firstName} {trainee.lastName}:\n')
+                        for index, match in enumerate(matches[0]):
+                            print(f'{index} - {match}')
+                        selected_match = input('\nSelect match to mark CTOs as unavailable.\nTo keep CTOs available for other matches, enter q\n')
+                        logger.debug(f'Selected match: {selected_match}')
+                        try:
+                            selected_match = int(selected_match)
+                            selected_match = matches[0][selected_match]
+                            cto_matches = matches[1]
+                            logger.debug(f'cto_matches list: {cto_matches}')
+                            cto_matches = cto_matches[selected_match]
+                            logger.debug(f'Toggling CTOs to assigned: {cto_matches}')
+                            for match in cto_matches:
+                                match.toggleAssigned(1)
+                                print(f'\n{match.firstName} {match.lastName} marked as assigned\n')
+                            time.sleep(1)
+                            choice = 0
+                        except (ValueError, KeyError, IndexError) as err:
+                            if selected_match in ['q','Q']:
+                                print('\nLeaving CTOs as unassigned\nReturning to main menu')
+                            else:
+                                logger.exception(err)
+                                print('\nInvalid selection, returning to main menu\n\n')
+                            time.sleep(.75)
+                            choice = 0
                 except (ValueError, IndexError):
                     logger.exception(f'Invalid discipline entered. Input was: {training_discipline}')
                     print(f'{training_discipline} is not valid. Please enter a number between 1 and 3.\nReturning to main menu\n')
                     time.sleep(.5)
                     choice = 0
-                matches = match_trainee_to_any(trainee, training_discipline)
-                if isinstance(matches, str):
-                    print('\n'+matches+'\n')
-                    time.sleep(1)
-                    choice = 0
-                else:
-                    print(f'\nShowing matches for {trainee.firstName} {trainee.lastName}:\n')
-                    for index, match in enumerate(matches[0]):
-                        print(f'{index} - {match}')
-                    selected_match = input('\nSelect match to mark CTOs as unavailable.\nTo keep CTOs available for other matches, enter q\n')
-                    logger.debug(f'Selected match: {selected_match}')
-                    try:
-                        selected_match = int(selected_match)
-                        selected_match = matches[0][selected_match]
-                        cto_matches = matches[1]
-                        logger.debug(f'cto_matches list: {cto_matches}')
-                        cto_matches = cto_matches[selected_match]
-                        logger.debug(f'Toggling CTOs to assigned: {cto_matches}')
-                        for match in cto_matches:
-                            match.toggleAssigned(1)
-                            print(f'\n{match.firstName} {match.lastName} marked as assigned\n')
-                        time.sleep(1)
-                        choice = 0
-                    except (ValueError, KeyError, IndexError) as err:
-                        if selected_match in ['q','Q']:
-                            print('\nLeaving CTOs as unassigned\nReturning to main menu')
-                        else:
-                            logger.exception(err)
-                            print('\nInvalid selection, returning to main menu\n\n')
-                        time.sleep(.75)
-                        choice = 0
             if choice ==3:
                 update_choice = 0
                 while update_choice == 0:
                     print('\nUpdate Employee:\n')
-                    update_choice = int(input('1 = Toggle CTO assigned setting\n2 = Update Employee Shift\n3 = Update Employee Schedule\n4 = Toggle CTO Break Status\n5 = Update Trainee Minimum Skill\n6 = Delete Employee\n9 = Main Menu\n'))
+                    update_choice = int(input('1 = Toggle CTO assigned setting\n2 = Update Employee Shift\n3 = Update Employee Schedule\n4 = Update Employee Personality\n5 = Toggle CTO Break Status\n6 = Update Trainee Minimum Skill\n8 = Delete Employee\n9 = Main Menu\n'))
+                    #Update CTO assigned setting
                     if update_choice == 1:
                         logger.debug('Toggle CTO assigned value selected')
                         print('Currently assigned CTOs:\n')
@@ -546,7 +600,24 @@ if __name__ == "__main__":
                             print('Invalid entry')
                             time.sleep(.5)
                             break
+                    #Update employee personality setting    
                     if update_choice == 4:
+                        print('\nUpdate Employee Personality:\n')
+                        #Create list of employees by index
+                        for index, employee in enumerate(loaded_list):
+                            print(f'{index} - {employee.firstName} {employee.lastName}')
+                        try:
+                            emp_selection = int(input('\nSelect employee to update:\n'))
+                            emp_selection = loaded_list[emp_selection]
+                            newValue = input(f'Enter the new personality value for {emp_selection.firstName} {emp_selection.lastName}\n').lower().strip()
+                            emp_selection.personality = newValue
+                            print('\nPersonality value updated successfully\n')
+                            time.sleep(.5)
+                        except (IndexError, ValueError) as err:
+                            logger.exception(f'Error occcured while updating employee personality setting {err}')
+                            print('Invalid entry')
+                    #Update CTO break status
+                    if update_choice == 5:
                         print('\nToggle CTO Break Status:\n')
                         for index, cto in enumerate(cto_list):
                             print(f'{index} - {cto.firstName} {cto.lastName}')
@@ -564,7 +635,7 @@ if __name__ == "__main__":
                             print('\nInvalid selection\n')
                             time.sleep(.5)
                             break
-                    if update_choice == 5:
+                    if update_choice == 6:
                         print('\nUpdate trainee minimum skill rating:\n')
                         for index, trainee in enumerate(trainee_list):
                             print(f'{index} - {trainee.firstName} {trainee.lastName}')
@@ -580,7 +651,7 @@ if __name__ == "__main__":
                             print('\nInvalid selection\n')
                             time.sleep(.5)
                             break
-                    if update_choice == 6:
+                    if update_choice == 8:
                         logger.debug('Delete employee selected')
                         print('Choose which employee to delete:\n')
                         for index, name in enumerate(loaded_list):
@@ -605,7 +676,7 @@ if __name__ == "__main__":
                             break
                         loaded_list.remove(employee)
                         if isinstance(employee, CTO):
-                            cto_list.remove(employee)
+                            cto_list.remove(employee)   
                         if isinstance(employee, Trainee):
                             trainee_list.remove(employee)
                         del employee
@@ -616,12 +687,23 @@ if __name__ == "__main__":
                         choice = 0
             if choice == 8:
                 report = pd.DataFrame()
+                temp_cto_list = []
+                temp_trainee_list = []
                 for cto in cto_list:
-                    report = report.append(vars(cto),ignore_index=True)
+                    temp_cto_list.append(vars(cto))
+                cdf = pd.DataFrame(temp_cto_list)
                 for trainee in trainee_list:
-                    report = report.append(vars(trainee),ignore_index=True)
-                report.to_excel(f'{date.today()} employee_report.xlsx')
-                print('\nReport created\n')
+                    temp_trainee_list.append(vars(trainee))
+                tdf = pd.DataFrame(temp_trainee_list)
+                report = pd.concat([report,cdf,tdf], ignore_index=True)
+                print(report)
+                option = int(input('Would you like to export to Excel?\nEnter 1 for yes\n'))
+                if option == 1:
+                    try:
+                        report.to_excel(f'{date.today()} employee_report.xlsx')
+                        print('\nReport created\n')
+                    except Exception as err:
+                        print(f'Unknown error occured: {err}')
                 while choice != 0:
                     choice = int(input('\nEnter 0 to return to main menu\n'))
                 choice = 0
