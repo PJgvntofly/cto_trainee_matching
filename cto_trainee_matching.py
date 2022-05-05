@@ -4,10 +4,12 @@ import os
 import pandas as pd
 from datetime import date
 import logging
+from logging.handlers import RotatingFileHandler
 
-logging.basicConfig(filename='cto_trainee_matching_log.log', level=logging.DEBUG,format='%(asctime)s %(levelname)s %(name)s %(message)s',force=True)
+logging.basicConfig(handlers=[RotatingFileHandler('cto_trainee_matching_log.log', maxBytes=100000, backupCount=5)], level=logging.DEBUG,format='%(asctime)s %(levelname)s %(name)s %(message)s',force=True)
 logger=logging.getLogger(__name__)
 
+#Create the possible schedule combinations. Each schedule is a binary array representing a 2 week period from Sunday to Saturday. 0 is not working, 1 is working. Dayshift and Graveyard schedules are identical, so only Graveyard names are used as keys.
 schedules = {}
 schedules['GY01'] = [0,1,1,1,1,0,0,0,1,1,1,0,0,0]
 schedules['GY02'] = [0,1,1,1,1,0,0,0,0,1,1,1,0,0]
@@ -43,6 +45,7 @@ schedules[0] = []
 cto_list = []
 trainee_list = []
 
+#Define Employee class. The CTO and Trainee classes are child classes of Employee
 class Employee:
     def __init__(self, firstName, lastName, shift, schedule, callTaking, police, fire, personality):
         self.firstName = firstName
@@ -53,6 +56,7 @@ class Employee:
         self.police = police
         self.fire = fire
         self.personality = personality
+    #All of the attributes except name may need to be updated. Define all attributes as properties with a getter and setter. 
     @property
     def shift(self):
         logger.debug(f'Getting shift for {self.firstName} {self.lastName}')
@@ -61,6 +65,7 @@ class Employee:
     def shift(self, newShift):
         logger.debug(f'Assigning new shift to {self.firstName} {self.lastName}')
         self._shift = newShift
+        #All setters must also update the pickle file for the Object in order for the updated value to be retained.
         logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
         employee_name = self.lastName + self.firstName
         file = open(employee_name, 'wb')
@@ -134,6 +139,7 @@ class Employee:
     def __str__(self):
         return f"Last Name: {self.lastName}, First Name: {self.firstName}\nShift: {self.shift}\nSchedule: {self.schedule}"
 
+#Define CTO class as a child of the Employee class
 class CTO(Employee):
     def __init__(self, firstName, lastName, shift, schedule, callTaking, police, fire, personality, partTime, skill, onBreak, assigned = 0):
         super().__init__(firstName, lastName, shift, schedule, callTaking, police, fire, personality)
@@ -176,15 +182,14 @@ class CTO(Employee):
         self._assigned = newValue
     def toggleAssigned(self, newValue):
         logger.debug(f'Starting toggleAssigned for {self.firstName} {self.lastName}')
-        logger.debug(f'Start value assigned: {self.assigned}')
         self.assigned = newValue
-        logger.debug(f'End value assigned {self.assigned}')
         logger.debug(f'Updating pickle file for {self.firstName} {self.lastName}')
         employee_name = self.lastName + self.firstName
         file = open(employee_name, 'wb')
         pickle.dump(self, file)
         file.close()
 
+#Define Trainee class as a child of the Employee class
 class Trainee(Employee):
     def __init__(self, firstName, lastName, shift, schedule, callTaking, police, fire, personality, minSkill):
         super().__init__(firstName, lastName, shift, schedule, callTaking, police, fire, personality)
@@ -206,6 +211,7 @@ class Trainee(Employee):
         file.close()
 
 def create_employee():
+    #Function to take user inputs and create an object of either the CTO or Trainee class
     logger.debug('Starting create_employee')
     selection = 0
     try:
@@ -261,7 +267,9 @@ def create_employee():
         trainee_name = Trainee(first_name,last_name,shift,schedule,calltaking,police,fire,personality,minSkill)
         return trainee_name
 
+
 def match_trainee_to_any(trainee, discipline):
+    #Function to match a trainee to any CTO regardless of shift
     logger.debug(f'Starting match_trainee_to_any with inputs:\n {trainee} and {discipline}\n')
     options = []
     ideal_list = []
@@ -406,8 +414,155 @@ def match_trainee_to_any(trainee, discipline):
                             cto_matches[match_name] = [option, second]
     return matches, cto_matches
 
+def match_trainee_to_specific_shift(trainee, discipline):
+    #Function to match a trainee to a CTO on the trainee's currenlty assigned shift
+    logger.debug(f'Starting match_trainee_to_specific_shift with inputs:\n {trainee} and {discipline}\n')
+    options = []
+    ideal_list = []
+    last_choice = []
+    matches = []
+    cto_matches = {}
+    for cto in cto_list:
+        logger.debug(f'Considering CTO {cto.firstName} {cto.lastName}')
+        if cto.assigned == 0 and getattr(cto,discipline) == 1 and cto.shift == trainee.shift:
+            logger.debug(f'Matches discipline & shift: {cto.firstName} {cto.lastName}')
+            if cto.skill >= trainee.minSkill and cto.personality == trainee.personality and cto.onBreak == 0:
+                logger.debug(f'Adding {cto.firstName} {cto.lastName} to ideal list')
+                ideal_list.append(cto)
+            elif cto.skill >= trainee.minSkill and cto.onBreak == 0:
+                logger.debug(f'Adding {cto.firstName} {cto.lastName} to options list')
+                options.append(cto)
+            else:
+                last_choice.append(cto)
+    if len(ideal_list) == 0 and len(options) == 0 and len(last_choice) == 0:
+        return f'No matches found for {trainee.firstName} {trainee.lastName}'
+    if len(ideal_list) > 1:
+        for cto in ideal_list:
+            logger.debug(f'Checking ideal list CTO {cto.firstName} {cto.lastName}')
+            schedule1 = cto.schedule
+            cto_shift = cto.shift
+            for second in ideal_list:
+                logger.debug(f'Looking for matches with CTO {second.firstName} {second.lastName}')
+                if second != cto:
+                    logger.debug(f'Comparing shifts: {cto_shift} {second.shift}')
+                    if second.shift == cto_shift:
+                        logger.debug('CTO shifts match, checking schedules')
+                        schedule2 = second.schedule
+                        i = 0
+                        week1_schedule = []
+                        week2_schedule = []
+                        days_in_a_row = 0
+                        while i < 7:
+                            week1_schedule.append(schedule1[i] + schedule2[i])
+                            i +=1
+                        while i < 14:
+                            week2_schedule.append(schedule1[i] + schedule2[i])
+                            i += 1
+                        logger.debug(f'Test Schedule: {week1_schedule}{week2_schedule}')
+                        for day in week1_schedule:
+                            if day == 0 and days_in_a_row < 5:
+                                days_in_a_row = 0
+                            elif day >= 1:
+                                days_in_a_row += 1
+                        if days_in_a_row >= 5:
+                            days_in_a_row = 0
+                            for day in week2_schedule:
+                                if day == 0 and days_in_a_row < 5:
+                                    days_in_a_row = 0
+                                elif day >= 1:
+                                    days_in_a_row += 1
+                            if days_in_a_row >= 5:
+                                match_name = f'Ideal Match: {cto.firstName} {cto.lastName}, {second.firstName} {second.lastName}'
+                                alt_match_name = f'Ideal Match: {second.firstName} {second.lastName}, {cto.firstName} {cto.lastName}'
+                                if (match_name not in matches) and (alt_match_name not in matches):
+                                    matches.append(match_name)
+                                    cto_matches[match_name] = [cto, second]
+    for option in ideal_list:
+        logger.debug(f'Checking ideal list CTO: {option.firstName} {option.lastName}')
+        schedule1 = option.schedule
+        cto_shift = option.shift
+        for second in options:
+            logger.debug(f'Checking other CTO: {second.firstName} {second.lastName}')
+            if second != option:
+                logger.debug(f'Comparing shifts: {cto_shift} {second.shift}')
+                if second.shift == cto_shift:
+                    logger.debug('CTO shifts match, checking schedules')
+                    schedule2 = second.schedule
+                    i = 0
+                    week1_schedule = []
+                    week2_schedule = []
+                    days_in_a_row = 0
+                    while i < 7:
+                        week1_schedule.append(schedule1[i] + schedule2[i])
+                        i +=1
+                    while i < 14:
+                        week2_schedule.append(schedule1[i] + schedule2[i])
+                        i += 1
+                    logger.debug(f'Test Schedule: {week1_schedule}{week2_schedule}')
+                    for day in week1_schedule:
+                        if day == 0 and days_in_a_row < 5:
+                            days_in_a_row = 0
+                        elif day >= 1:
+                            days_in_a_row += 1
+                    if days_in_a_row >= 5:
+                        days_in_a_row = 0
+                        for day in week2_schedule:
+                            if day == 0 and days_in_a_row < 5:
+                                days_in_a_row = 0
+                            elif day >= 1:
+                                days_in_a_row += 1
+                        if days_in_a_row >= 5:
+                            match_name = f'One Ideal CTO: {option.firstName} {option.lastName}, {second.firstName} {second.lastName}'
+                            alt_match_name = f'One Ideal CTO: {second.firstName} {second.lastName}, {option.firstName} {option.lastName}'
+                            ideal_match = f'Ideal Match: {cto.firstName} {cto.lastName}, {second.firstName} {second.lastName}'
+                            if (match_name not in matches) and (alt_match_name not in matches) and (ideal_match not in matches):
+                                matches.append(match_name)
+                                cto_matches[match_name] = [option, second]
+    for option in options:
+        logger.debug(f'Checking non-ideal CTO {option.firstName} {option.lastName}')
+        schedule1 = option.schedule
+        cto_shift = option.shift
+        for second in cto_list:
+            logger.debug(f'Checking CTO {second.firstName} {second.lastName}')
+            logger.debug(f'Comparing shifts: {cto_shift} {second.shift}')
+            if second != option and (second.shift == cto_shift):
+                logger.debug('CTO shifts match, checking schedules')
+                schedule2 = second.schedule
+                i = 0
+                week1_schedule = []
+                week2_schedule = []
+                days_in_a_row = 0
+                while i < 7:
+                    week1_schedule.append(schedule1[i] + schedule2[i])
+                    i +=1
+                while i < 14:
+                    week2_schedule.append(schedule1[i] + schedule2[i])
+                    i +=1
+                logger.debug(f'Test Schedule: {week1_schedule}{week2_schedule}')
+                for day in week1_schedule:
+                    if day == 0 and days_in_a_row < 5:
+                        days_in_a_row = 0
+                    elif day >= 1:
+                        days_in_a_row += 1
+                if days_in_a_row >= 5:
+                    days_in_a_row = 0
+                    for day in week2_schedule:
+                        if day == 0 and days_in_a_row < 5:
+                            days_in_a_row = 0
+                        elif day >= 1:
+                            days_in_a_row += 1
+                    if days_in_a_row >= 5:
+                        match_name = f'Match: {option.firstName} {option.lastName}, {second.firstName} {second.lastName}'
+                        alt_match_name = f'Match: {second.firstName} {second.lastName}, {option.firstName} {option.lastName}'
+                        ideal_match = f'One Ideal CTO: {option.firstName} {option.lastName}, {second.firstName} {second.lastName}'
+                        if (match_name not in matches) and (alt_match_name not in matches) and (ideal_match not in matches):
+                            matches.append(match_name)
+                            cto_matches[match_name] = [option, second]
+    return matches, cto_matches
+
 def startup():
-    choice = int(input('\nWhat would you like to do?\n1 = Create New Employee\n2 = Match Trainee to CTO on any Shift\n3 = Update Employee\n8 = Create Report of Existing Employees\n9 = Exit\n'))
+    #Function to take input then perform an action in the while loop defined below
+    choice = int(input('\nWhat would you like to do?\n1 = Create New Employee\n2 = Match a Trainee to a CTO \n3 = Update Employee\n8 = Create Report of Existing Employees\n9 = Exit\n'))
     return choice
 
 if __name__ == "__main__":
@@ -441,6 +596,7 @@ if __name__ == "__main__":
     while choice == 0:
         choice = startup()
         while choice != 0:
+            #Create employee
             if choice == 1:
                 employee = create_employee()
                 try:
@@ -457,57 +613,120 @@ if __name__ == "__main__":
                     choice = 0
             if choice == 9:
                 exit()
+            #Match a trainee to a CTO
             if choice == 2:
-                print('\nWhich Trainee?\n')
-                for index, name in enumerate(trainee_list):
-                    print(f'{index} {name.firstName} {name.lastName}')
-                try:
-                    trainee = int(input('\nEnter the corresponding number\n'))
-                    trainee = trainee_list[trainee]
-                except (ValueError, IndexError) as err:
-                    logger.exception(f'Invalid trainee selection:\n{err}')
-                    print('Please select a valid number')
-                    choice = 0
-                training_discipline = int(input('\nWhich discipline?\n1 = Call Taking\n2 = Police\n3 = Fire\n').strip())
-                try:
-                    disciplines = ['calltaking', 'police', 'fire']
-                    training_discipline = disciplines[training_discipline - 1]
-                    matches = match_trainee_to_any(trainee, training_discipline)
-                    if isinstance(matches, str):
-                        print('\n'+matches+'\n')
+                print('\nMatch trainee to CTOs\n')
+                match_type = 0
+                while match_type not in [1,2,9]:
+                    #Start while loop to get input and direct the app to the correct logic tree
+                    match_type = int(input("1 = Match trainee to CTO on any shift\n2 = Match Trainee to CTO on the Trainee's Currently Assigned Shift\n9 = Return to Main Menu"))
+                    print('\nWhich Trainee?\n')
+                    for index, name in enumerate(trainee_list):
+                        print(f'{index} {name.firstName} {name.lastName}')
+                    try:
+                        trainee = int(input('\nEnter the corresponding number\n'))
+                        trainee = trainee_list[trainee]
+                    except (ValueError, IndexError) as err:
+                        logger.exception(f'Invalid trainee selection:\n{err}')
+                        print('Please select a valid number\n')
                         time.sleep(1)
-                        choice = 0
-                    else:
-                        print(f'\nShowing matches for {trainee.firstName} {trainee.lastName}:\n')
-                        for index, match in enumerate(matches[0]):
-                            print(f'{index} - {match}')
-                        selected_match = input('\nSelect match to mark CTOs as unavailable.\nTo keep CTOs available for other matches, enter q\n')
-                        logger.debug(f'Selected match: {selected_match}')
+                        break
+                    training_discipline = int(input('\nWhich discipline?\n1 = Call Taking\n2 = Police\n3 = Fire\n').strip())
+                    if match_type == 1:
                         try:
-                            selected_match = int(selected_match)
-                            selected_match = matches[0][selected_match]
-                            cto_matches = matches[1]
-                            logger.debug(f'cto_matches list: {cto_matches}')
-                            cto_matches = cto_matches[selected_match]
-                            logger.debug(f'Toggling CTOs to assigned: {cto_matches}')
-                            for match in cto_matches:
-                                match.toggleAssigned(1)
-                                print(f'\n{match.firstName} {match.lastName} marked as assigned\n')
-                            time.sleep(1)
-                            choice = 0
-                        except (ValueError, KeyError, IndexError) as err:
-                            if selected_match in ['q','Q']:
-                                print('\nLeaving CTOs as unassigned\nReturning to main menu')
+                            disciplines = ['calltaking', 'police', 'fire']
+                            training_discipline = disciplines[training_discipline - 1]
+                            matches = match_trainee_to_any(trainee, training_discipline)
+                            if isinstance(matches, str):
+                                print('\n'+matches+'\n')
+                                time.sleep(1)
+                                choice = 0
                             else:
-                                logger.exception(err)
-                                print('\nInvalid selection, returning to main menu\n\n')
-                            time.sleep(.75)
+                                print(f'\nShowing matches for {trainee.firstName} {trainee.lastName}:\n')
+                                for index, match in enumerate(matches[0]):
+                                    print(f'{index} - {match}')
+                                selected_match = input('\nSelect match to mark CTOs as unavailable.\nTo keep CTOs available for other matches, enter q\n')
+                                logger.debug(f'Selected match: {selected_match}')
+                                try:
+                                    selected_match = int(selected_match)
+                                    selected_match = matches[0][selected_match]
+                                    cto_matches = matches[1]
+                                    logger.debug(f'cto_matches list: {cto_matches}')
+                                    cto_matches = cto_matches[selected_match]
+                                    logger.debug(f'Toggling CTOs to assigned: {cto_matches}')
+                                    for match in cto_matches:
+                                        match.toggleAssigned(1)
+                                        print(f'\n{match.firstName} {match.lastName} marked as assigned\n')
+                                    time.sleep(1)
+                                    choice = 0
+                                except (ValueError, KeyError, IndexError) as err:
+                                    if selected_match in ['q','Q']:
+                                        print('\nLeaving CTOs as unassigned\nReturning to main menu\n')
+                                    else:
+                                        logger.exception(err)
+                                        print('\nInvalid selection, returning to main menu\n\n')
+                                    time.sleep(.75)
+                                    choice = 0
+                        except (ValueError, IndexError):
+                            logger.exception(f'Invalid discipline entered. Input was: {training_discipline}')
+                            print(f'{training_discipline} is not valid. Please enter a number between 1 and 3.\nReturning to main menu\n')
+                            time.sleep(.5)
                             choice = 0
-                except (ValueError, IndexError):
-                    logger.exception(f'Invalid discipline entered. Input was: {training_discipline}')
-                    print(f'{training_discipline} is not valid. Please enter a number between 1 and 3.\nReturning to main menu\n')
-                    time.sleep(.5)
-                    choice = 0
+                    elif match_type == 2:
+                        try:
+                            if trainee.shift == 0:
+                                print(f'\n{trainee.firstName} {trainee.lastName} has no assigned shift\nSwitching to match CTOs on any shift\n')
+                                time.sleep(.5)
+                                disciplines = ['calltaking', 'police', 'fire']
+                                training_discipline = disciplines[training_discipline - 1]
+                                matches = match_trainee_to_any(trainee, training_discipline)
+                            else:
+                                assigned_shift = ['Day Shift','Graveyard','Power Shift']
+                                assigned_shift = assigned_shift[(trainee.shift - 1)]
+                                print(f"\n{trainee.firstName} {trainee.lastName}'s currently assigned shift is {assigned_shift}\n")
+                                disciplines = ['calltaking', 'police', 'fire']
+                                training_discipline = disciplines[training_discipline - 1]
+                                matches = match_trainee_to_specific_shift(trainee, training_discipline)
+                            if isinstance(matches, str):
+                                print('\n'+matches+'\n')
+                                time.sleep(1)
+                                choice = 0
+                            else:
+                                print(f'\nShowing matches for {trainee.firstName} {trainee.lastName}:\n')
+                                for index, match in enumerate(matches[0]):
+                                    print(f'{index} - {match}')
+                                selected_match = input('\nSelect match to mark CTOs as unavailable.\nTo keep CTOs available for other matches, enter q\n')
+                                logger.debug(f'Selected match: {selected_match}')
+                                try:
+                                    selected_match = int(selected_match)
+                                    selected_match = matches[0][selected_match]
+                                    cto_matches = matches[1]
+                                    logger.debug(f'cto_matches list: {cto_matches}')
+                                    cto_matches = cto_matches[selected_match]
+                                    logger.debug(f'Toggling CTOs to assigned: {cto_matches}')
+                                    for match in cto_matches:
+                                        match.toggleAssigned(1)
+                                        print(f'\n{match.firstName} {match.lastName} marked as assigned\n')
+                                    time.sleep(1)
+                                    match_type = 9
+                                except (ValueError, KeyError, IndexError) as err:
+                                    if selected_match in ['q','Q']:
+                                        print('\nLeaving CTOs as unassigned\nReturning to main menu')
+                                        match_type = 9
+                                        break
+                                    else:
+                                        logger.exception(err)
+                                        print('\nInvalid selection, returning to main menu\n\n')
+                                    time.sleep(.75)
+                                    match_type = 9
+                        except (ValueError, IndexError):
+                            logger.exception(f'Invalid discipline entered. Input was: {training_discipline}')
+                            print(f'{training_discipline} is not valid. Please enter a number between 1 and 3.\nReturning to main menu\n')
+                            time.sleep(.5)
+                            match_type = 9
+                    elif match_type == 9:
+                        choice = 0
+            #Open update employee menu
             if choice ==3:
                 update_choice = 0
                 while update_choice == 0:
@@ -548,6 +767,7 @@ if __name__ == "__main__":
                                 choice = 0
                             except (ValueError, KeyError):
                                 choice = 0
+                    #Update employee's assigned shift
                     if update_choice == 2:
                         logger.debug('Update employee shift selected')
                         print('\nUpdate Employee Shift:\n')
@@ -563,7 +783,7 @@ if __name__ == "__main__":
                             break
                         try:
                             new_shift = int(input(f'\nEnter new shift for {emp_selection.firstName} {emp_selection.lastName}:\nDays = 1\nGraves = 2\nPower = 3\nIf none, enter 0\n'))
-                            if new_shift not in [1,2,3]:
+                            if new_shift not in [1,2,3,0]:
                                 raise ValueError('Please enter only 0, 1, 2, or 3')
                         except ValueError as err:
                             logger.exception(f'Error occurred while updating employee shift. {err}')
@@ -574,6 +794,7 @@ if __name__ == "__main__":
                         print('\nShift updated successfully\n')
                         time.sleep(.5)
                         update_choice = 0
+                    #Update employee's assigned schedule
                     if update_choice == 3:
                         logger.debug('Update employee schedule selected')
                         print('\nUpdate Employee Schedule:\n')
@@ -608,9 +829,13 @@ if __name__ == "__main__":
                             print(f'{index} - {employee.firstName} {employee.lastName}')
                         try:
                             emp_selection = int(input('\nSelect employee to update:\n'))
-                            emp_selection = loaded_list[emp_selection]
-                            newValue = input(f'Enter the new personality value for {emp_selection.firstName} {emp_selection.lastName}\n').lower().strip()
-                            emp_selection.personality = newValue
+                            if emp_selection == 99:
+                                for employee in loaded_list:
+                                    employee.personality = 'x'
+                            else:
+                                emp_selection = loaded_list[emp_selection]
+                                newValue = input(f'Enter the new personality value for {emp_selection.firstName} {emp_selection.lastName}\n').lower().strip()
+                                emp_selection.personality = newValue
                             print('\nPersonality value updated successfully\n')
                             time.sleep(.5)
                         except (IndexError, ValueError) as err:
@@ -635,6 +860,7 @@ if __name__ == "__main__":
                             print('\nInvalid selection\n')
                             time.sleep(.5)
                             break
+                    #Update trainee minimum skill
                     if update_choice == 6:
                         print('\nUpdate trainee minimum skill rating:\n')
                         for index, trainee in enumerate(trainee_list):
@@ -651,6 +877,7 @@ if __name__ == "__main__":
                             print('\nInvalid selection\n')
                             time.sleep(.5)
                             break
+                    #Delete employeee
                     if update_choice == 8:
                         logger.debug('Delete employee selected')
                         print('Choose which employee to delete:\n')
@@ -685,15 +912,34 @@ if __name__ == "__main__":
                         choice = 0
                     if update_choice == 9:
                         choice = 0
+            #Create report of all employee in the app
             if choice == 8:
                 report = pd.DataFrame()
                 temp_cto_list = []
                 temp_trainee_list = []
+                c = 0
+                t = 0
                 for cto in cto_list:
                     temp_cto_list.append(vars(cto))
+                    for key, value in schedules.items():
+                        if value == temp_cto_list[c]['_schedule']:
+                            temp_cto_list[c]['_schedule'] = key
+                            if temp_cto_list[c]['_shift'] == 1:
+                                temp_cto_list[c]['_schedule'] = temp_cto_list[c]['_schedule'].replace('GY','DS')
+                            if temp_cto_list[c]['_shift'] == 3:
+                                temp_cto_list[c]['_schedule'] = temp_cto_list[c]['_schedule'].replace('GY','PS')
+                    c += 1
                 cdf = pd.DataFrame(temp_cto_list)
                 for trainee in trainee_list:
                     temp_trainee_list.append(vars(trainee))
+                    for key, value in schedules.items():
+                        if value == temp_trainee_list[t]['_schedule']:
+                            temp_trainee_list[t]['_schedule'] = key
+                            if temp_trainee_list[t]['_shift'] == 1:
+                                temp_trainee_list[t]['_schedule'] = temp_cto_list[t]['_schedule'].replace('GY','DS')
+                            if temp_trainee_list[t]['_shift'] == 1:
+                                temp_trainee_list[t]['_schedule'] = temp_cto_list[t]['_schedule'].replace('GY','PS')
+                    t += 1
                 tdf = pd.DataFrame(temp_trainee_list)
                 report = pd.concat([report,cdf,tdf], ignore_index=True)
                 print(report)

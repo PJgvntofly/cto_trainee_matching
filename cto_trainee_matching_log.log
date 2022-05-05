@@ -1,0 +1,315 @@
+2022-05-04 20:20:41,250 DEBUG __main__ Initializing employees ['SiglerAlex\n', 'TorgersonJames\n', 'TorgersonEsther\n', 'WoodardKhara\n', 'MckennaAnna\n', 'OlsonMegan\n', 'PiazzaChad\n', 'ArnoldSimon\n', 'BaroumesMarshaine\n', 'BondDevin\n', 'BruceMark\n', 'ColemanLars\n', 'ContrerasKelly\n', 'GaringerAshley\n', 'KnightJamie\n', 'MuresanCosmina\n', 'SawyerMyranda\n', 'TraineeTest\n', '\n']
+2022-05-04 20:20:41,252 ERROR __main__ [Errno 2] No such file or directory: ''
+Traceback (most recent call last):
+  File "c:\Users\cgass\Documents\GitHub\cto_trainee_matching\cto_trainee_matching.py", line 582, in <module>
+    file = open(name, 'rb')
+FileNotFoundError: [Errno 2] No such file or directory: ''
+2022-05-04 20:20:41,253 DEBUG __main__ Removing 
+2022-05-04 20:20:48,372 DEBUG __main__ Getting shift for Test Trainee
+2022-05-04 20:20:48,372 DEBUG __main__ Getting schedule for Test Trainee
+2022-05-04 20:20:48,372 DEBUG __main__ Starting match_trainee_to_any with inputs:
+ Last Name: Trainee, First Name: Test
+Shift: 0
+Schedule: 0 and calltaking
+
+2022-05-04 20:20:48,373 DEBUG __main__ Considering CTO Alex Sigler
+2022-05-04 20:20:48,373 DEBUG __main__ Getting assigned value for Alex Sigler
+2022-05-04 20:20:48,373 DEBUG __main__ Getting call taking value for Alex Sigler
+2022-05-04 20:20:48,373 DEBUG __main__ Matches discipline: Alex Sigler
+2022-05-04 20:20:48,373 DEBUG __main__ Getting minSkill value for Test Trainee
+2022-05-04 20:20:48,373 DEBUG __main__ Getting minSkill value for Test Trainee
+2022-05-04 20:20:48,374 DEBUG __main__ Considering CTO James Torgerson
+2022-05-04 20:20:48,374 DEBUG __main__ Getting assigned value for James Torgerson
+2022-05-04 20:20:48,374 DEBUG __main__ Considering CTO Esther Torgerson
+2022-05-04 20:20:48,374 DEBUG __main__ Getting assigned value for Esther Torgerson
+2022-05-04 20:20:48,374 DEBUG __main__ Getting call taking value for Esther Torgerson
+2022-05-04 20:20:48,374 DEBUG __main__ Matches discipline: Esther Torgerson
+2022-05-04 20:20:48,374 DEBUG __main__ Getting minSkill value for Test Trainee
+2022-05-04 20:20:48,375 DEBUG __main__ Getting personality for Esther Torgerson
+2022-05-04 20:20:48,375 DEBUG __main__ Getting personality for Test Trainee
+2022-05-04 20:20:48,375 DEBUG __main__ Adding Esther Torgerson to ideal list
+2022-05-04 20:20:48,375 DEBUG __main__ Considering CTO Khara Woodard
+2022-05-04 20:20:48,375 DEBUG __main__ Getting assigned value for Khara Woodard
+2022-05-04 20:20:48,375 DEBUG __main__ Considering CTO Anna Mckenna
+2022-05-04 20:20:48,376 DEBUG __main__ Getting assigned value for Anna Mckenna
+2022-05-04 20:20:48,376 DEBUG __main__ Considering CTO Megan Olson
+2022-05-04 20:20:48,376 DEBUG __main__ Getting assigned value for Megan Olson
+2022-05-04 20:20:48,376 DEBUG __main__ Getting call taking value for Megan Olson
+2022-05-04 20:20:48,376 DEBUG __main__ Matches discipline: Megan Olson
+2022-05-04 20:20:48,376 DEBUG __main__ Getting minSkill value for Test Trainee
+2022-05-04 20:20:48,377 DEBUG __main__ Getting personality for Megan Olson
+2022-05-04 20:20:48,377 DEBUG __main__ Getting personality for Test Trainee
+2022-05-04 20:20:48,377 DEBUG __main__ Adding Megan Olson to ideal list
+2022-05-04 20:20:48,377 DEBUG __main__ Considering CTO Chad Piazza
+2022-05-04 20:20:48,377 DEBUG __main__ Getting assigned value for Chad Piazza
+2022-05-04 20:20:48,377 DEBUG __main__ Considering CTO Simon Arnold
+2022-05-04 20:20:48,377 DEBUG __main__ Getting assigned value for Simon Arnold
+2022-05-04 20:20:48,378 DEBUG __main__ Considering CTO Marshaine Baroumes
+2022-05-04 20:20:48,378 DEBUG __main__ Getting assigned value for Marshaine Baroumes
+2022-05-04 20:20:48,378 DEBUG __main__ Considering CTO Devin Bond
+2022-05-04 20:20:48,378 DEBUG __main__ Getting assigned value for Devin Bond
+2022-05-04 20:20:48,378 DEBUG __main__ Getting call taking value for Devin Bond
+2022-05-04 20:20:48,378 DEBUG __main__ Matches discipline: Devin Bond
+2022-05-04 20:20:48,379 DEBUG __main__ Getting minSkill value for Test Trainee
+2022-05-04 20:20:48,379 DEBUG __main__ Getting personality for Devin Bond
+2022-05-04 20:20:48,379 DEBUG __main__ Getting personality for Test Trainee
+2022-05-04 20:20:48,379 DEBUG __main__ Adding Devin Bond to ideal list
+2022-05-04 20:20:48,379 DEBUG __main__ Considering CTO Mark Bruce
+2022-05-04 20:20:48,379 DEBUG __main__ Getting assigned value for Mark Bruce
+2022-05-04 20:20:48,379 DEBUG __main__ Considering CTO Lars Coleman
+2022-05-04 20:20:48,380 DEBUG __main__ Getting assigned value for Lars Coleman
+2022-05-04 20:20:48,380 DEBUG __main__ Considering CTO Kelly Contreras
+2022-05-04 20:20:48,380 DEBUG __main__ Getting assigned value for Kelly Contreras
+2022-05-04 20:20:48,380 DEBUG __main__ Getting call taking value for Kelly Contreras
+2022-05-04 20:20:48,380 DEBUG __main__ Matches discipline: Kelly Contreras
+2022-05-04 20:20:48,380 DEBUG __main__ Getting minSkill value for Test Trainee
+2022-05-04 20:20:48,380 DEBUG __main__ Getting personality for Kelly Contreras
+2022-05-04 20:20:48,381 DEBUG __main__ Getting personality for Test Trainee
+2022-05-04 20:20:48,381 DEBUG __main__ Adding Kelly Contreras to ideal list
+2022-05-04 20:20:48,381 DEBUG __main__ Considering CTO Ashley Garinger
+2022-05-04 20:20:48,381 DEBUG __main__ Getting assigned value for Ashley Garinger
+2022-05-04 20:20:48,381 DEBUG __main__ Getting call taking value for Ashley Garinger
+2022-05-04 20:20:48,381 DEBUG __main__ Matches discipline: Ashley Garinger
+2022-05-04 20:20:48,382 DEBUG __main__ Getting minSkill value for Test Trainee
+2022-05-04 20:20:48,382 DEBUG __main__ Getting personality for Ashley Garinger
+2022-05-04 20:20:48,382 DEBUG __main__ Getting personality for Test Trainee
+2022-05-04 20:20:48,382 DEBUG __main__ Adding Ashley Garinger to ideal list
+2022-05-04 20:20:48,382 DEBUG __main__ Considering CTO Jamie Knight
+2022-05-04 20:20:48,382 DEBUG __main__ Getting assigned value for Jamie Knight
+2022-05-04 20:20:48,382 DEBUG __main__ Getting call taking value for Jamie Knight
+2022-05-04 20:20:48,383 DEBUG __main__ Matches discipline: Jamie Knight
+2022-05-04 20:20:48,383 DEBUG __main__ Getting minSkill value for Test Trainee
+2022-05-04 20:20:48,383 DEBUG __main__ Getting minSkill value for Test Trainee
+2022-05-04 20:20:48,383 DEBUG __main__ Considering CTO Cosmina Muresan
+2022-05-04 20:20:48,383 DEBUG __main__ Getting assigned value for Cosmina Muresan
+2022-05-04 20:20:48,383 DEBUG __main__ Considering CTO Myranda Sawyer
+2022-05-04 20:20:48,383 DEBUG __main__ Getting assigned value for Myranda Sawyer
+2022-05-04 20:20:48,384 DEBUG __main__ Getting call taking value for Myranda Sawyer
+2022-05-04 20:20:48,384 DEBUG __main__ Matches discipline: Myranda Sawyer
+2022-05-04 20:20:48,384 DEBUG __main__ Getting minSkill value for Test Trainee
+2022-05-04 20:20:48,384 DEBUG __main__ Getting personality for Myranda Sawyer
+2022-05-04 20:20:48,384 DEBUG __main__ Getting personality for Test Trainee
+2022-05-04 20:20:48,384 DEBUG __main__ Adding Myranda Sawyer to ideal list
+2022-05-04 20:20:48,384 DEBUG __main__ Checking ideal list CTO Esther Torgerson
+2022-05-04 20:20:48,385 DEBUG __main__ Getting schedule for Esther Torgerson
+2022-05-04 20:20:48,385 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,385 DEBUG __main__ Looking for matches with CTO Esther Torgerson
+2022-05-04 20:20:48,385 DEBUG __main__ Looking for matches with CTO Megan Olson
+2022-05-04 20:20:48,385 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,385 DEBUG __main__ Comparing shifts: 1 3
+2022-05-04 20:20:48,385 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,386 DEBUG __main__ Looking for matches with CTO Devin Bond
+2022-05-04 20:20:48,386 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,386 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,386 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,386 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,386 DEBUG __main__ Getting schedule for Devin Bond
+2022-05-04 20:20:48,387 DEBUG __main__ Test Schedule: [2, 1, 1, 0, 0, 1, 1][2, 1, 1, 1, 1, 1, 1]
+2022-05-04 20:20:48,387 DEBUG __main__ Looking for matches with CTO Kelly Contreras
+2022-05-04 20:20:48,387 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,387 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,387 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,387 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,387 DEBUG __main__ Getting schedule for Kelly Contreras
+2022-05-04 20:20:48,388 DEBUG __main__ Test Schedule: [1, 1, 1, 0, 1, 1, 1][2, 1, 1, 1, 1, 1, 1]
+2022-05-04 20:20:48,388 DEBUG __main__ Looking for matches with CTO Ashley Garinger
+2022-05-04 20:20:48,388 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,388 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,388 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,388 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,388 DEBUG __main__ Getting schedule for Ashley Garinger
+2022-05-04 20:20:48,389 DEBUG __main__ Test Schedule: [1, 1, 2, 1, 1, 1, 0][1, 1, 1, 2, 1, 1, 0]
+2022-05-04 20:20:48,389 DEBUG __main__ Looking for matches with CTO Myranda Sawyer
+2022-05-04 20:20:48,389 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:48,389 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,389 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:48,389 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,389 DEBUG __main__ Getting schedule for Myranda Sawyer
+2022-05-04 20:20:48,390 DEBUG __main__ Test Schedule: [1, 1, 2, 1, 1, 1, 0][1, 1, 1, 2, 1, 1, 0]
+2022-05-04 20:20:48,390 DEBUG __main__ Checking ideal list CTO Megan Olson
+2022-05-04 20:20:48,390 DEBUG __main__ Getting schedule for Megan Olson
+2022-05-04 20:20:48,390 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,390 DEBUG __main__ Looking for matches with CTO Esther Torgerson
+2022-05-04 20:20:48,390 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,390 DEBUG __main__ Comparing shifts: 3 1
+2022-05-04 20:20:48,391 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,391 DEBUG __main__ Looking for matches with CTO Megan Olson
+2022-05-04 20:20:48,391 DEBUG __main__ Looking for matches with CTO Devin Bond
+2022-05-04 20:20:48,391 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,391 DEBUG __main__ Comparing shifts: 3 1
+2022-05-04 20:20:48,392 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,392 DEBUG __main__ Looking for matches with CTO Kelly Contreras
+2022-05-04 20:20:48,392 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,392 DEBUG __main__ Comparing shifts: 3 1
+2022-05-04 20:20:48,392 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,392 DEBUG __main__ Looking for matches with CTO Ashley Garinger
+2022-05-04 20:20:48,393 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,393 DEBUG __main__ Comparing shifts: 3 1
+2022-05-04 20:20:48,393 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,393 DEBUG __main__ Looking for matches with CTO Myranda Sawyer
+2022-05-04 20:20:48,393 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:48,393 DEBUG __main__ Comparing shifts: 3 1
+2022-05-04 20:20:48,394 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:48,394 DEBUG __main__ Checking ideal list CTO Devin Bond
+2022-05-04 20:20:48,394 DEBUG __main__ Getting schedule for Devin Bond
+2022-05-04 20:20:48,394 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,394 DEBUG __main__ Looking for matches with CTO Esther Torgerson
+2022-05-04 20:20:48,394 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,394 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,395 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,395 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,395 DEBUG __main__ Getting schedule for Esther Torgerson
+2022-05-04 20:20:48,395 DEBUG __main__ Test Schedule: [2, 1, 1, 0, 0, 1, 1][2, 1, 1, 1, 1, 1, 1]
+2022-05-04 20:20:48,395 DEBUG __main__ Looking for matches with CTO Megan Olson
+2022-05-04 20:20:48,395 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,395 DEBUG __main__ Comparing shifts: 1 3
+2022-05-04 20:20:48,396 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,396 DEBUG __main__ Looking for matches with CTO Devin Bond
+2022-05-04 20:20:48,396 DEBUG __main__ Looking for matches with CTO Kelly Contreras
+2022-05-04 20:20:48,396 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,396 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,396 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,396 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,397 DEBUG __main__ Getting schedule for Kelly Contreras
+2022-05-04 20:20:48,397 DEBUG __main__ Test Schedule: [1, 0, 0, 0, 1, 2, 2][2, 0, 0, 0, 2, 2, 2]
+2022-05-04 20:20:48,397 DEBUG __main__ Looking for matches with CTO Ashley Garinger
+2022-05-04 20:20:48,397 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,397 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,397 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,398 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,398 DEBUG __main__ Getting schedule for Ashley Garinger
+2022-05-04 20:20:48,398 DEBUG __main__ Test Schedule: [1, 0, 1, 1, 1, 2, 1][1, 0, 0, 1, 2, 2, 1]
+2022-05-04 20:20:48,398 DEBUG __main__ Looking for matches with CTO Myranda Sawyer
+2022-05-04 20:20:48,398 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:48,398 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,398 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:48,399 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,399 DEBUG __main__ Getting schedule for Myranda Sawyer
+2022-05-04 20:20:48,399 DEBUG __main__ Test Schedule: [1, 0, 1, 1, 1, 2, 1][1, 0, 0, 1, 2, 2, 1]
+2022-05-04 20:20:48,399 DEBUG __main__ Checking ideal list CTO Kelly Contreras
+2022-05-04 20:20:48,399 DEBUG __main__ Getting schedule for Kelly Contreras
+2022-05-04 20:20:48,399 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,399 DEBUG __main__ Looking for matches with CTO Esther Torgerson
+2022-05-04 20:20:48,400 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,400 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,400 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,400 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,400 DEBUG __main__ Getting schedule for Esther Torgerson
+2022-05-04 20:20:48,400 DEBUG __main__ Test Schedule: [1, 1, 1, 0, 1, 1, 1][2, 1, 1, 1, 1, 1, 1]
+2022-05-04 20:20:48,400 DEBUG __main__ Looking for matches with CTO Megan Olson
+2022-05-04 20:20:48,401 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,401 DEBUG __main__ Comparing shifts: 1 3
+2022-05-04 20:20:48,401 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,401 DEBUG __main__ Looking for matches with CTO Devin Bond
+2022-05-04 20:20:48,401 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,401 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,402 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,402 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,402 DEBUG __main__ Getting schedule for Devin Bond
+2022-05-04 20:20:48,402 DEBUG __main__ Test Schedule: [1, 0, 0, 0, 1, 2, 2][2, 0, 0, 0, 2, 2, 2]
+2022-05-04 20:20:48,402 DEBUG __main__ Looking for matches with CTO Kelly Contreras
+2022-05-04 20:20:48,402 DEBUG __main__ Looking for matches with CTO Ashley Garinger
+2022-05-04 20:20:48,402 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,403 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,403 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,403 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,403 DEBUG __main__ Getting schedule for Ashley Garinger
+2022-05-04 20:20:48,403 DEBUG __main__ Test Schedule: [0, 0, 1, 1, 2, 2, 1][1, 0, 0, 1, 2, 2, 1]
+2022-05-04 20:20:48,403 DEBUG __main__ Looking for matches with CTO Myranda Sawyer
+2022-05-04 20:20:48,403 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:48,404 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,404 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:48,404 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,404 DEBUG __main__ Getting schedule for Myranda Sawyer
+2022-05-04 20:20:48,404 DEBUG __main__ Test Schedule: [0, 0, 1, 1, 2, 2, 1][1, 0, 0, 1, 2, 2, 1]
+2022-05-04 20:20:48,404 DEBUG __main__ Checking ideal list CTO Ashley Garinger
+2022-05-04 20:20:48,404 DEBUG __main__ Getting schedule for Ashley Garinger
+2022-05-04 20:20:48,405 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,405 DEBUG __main__ Looking for matches with CTO Esther Torgerson
+2022-05-04 20:20:48,405 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,405 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,405 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,405 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,406 DEBUG __main__ Getting schedule for Esther Torgerson
+2022-05-04 20:20:48,406 DEBUG __main__ Test Schedule: [1, 1, 2, 1, 1, 1, 0][1, 1, 1, 2, 1, 1, 0]
+2022-05-04 20:20:48,406 DEBUG __main__ Looking for matches with CTO Megan Olson
+2022-05-04 20:20:48,406 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,406 DEBUG __main__ Comparing shifts: 1 3
+2022-05-04 20:20:48,406 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,406 DEBUG __main__ Looking for matches with CTO Devin Bond
+2022-05-04 20:20:48,407 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,407 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,407 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,407 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,407 DEBUG __main__ Getting schedule for Devin Bond
+2022-05-04 20:20:48,408 DEBUG __main__ Test Schedule: [1, 0, 1, 1, 1, 2, 1][1, 0, 0, 1, 2, 2, 1]
+2022-05-04 20:20:48,408 DEBUG __main__ Looking for matches with CTO Kelly Contreras
+2022-05-04 20:20:48,408 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,408 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,408 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,408 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,408 DEBUG __main__ Getting schedule for Kelly Contreras
+2022-05-04 20:20:48,409 DEBUG __main__ Test Schedule: [0, 0, 1, 1, 2, 2, 1][1, 0, 0, 1, 2, 2, 1]
+2022-05-04 20:20:48,409 DEBUG __main__ Looking for matches with CTO Ashley Garinger
+2022-05-04 20:20:48,409 DEBUG __main__ Looking for matches with CTO Myranda Sawyer
+2022-05-04 20:20:48,409 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:48,409 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,409 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:48,409 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,410 DEBUG __main__ Getting schedule for Myranda Sawyer
+2022-05-04 20:20:48,410 DEBUG __main__ Test Schedule: [0, 0, 2, 2, 2, 2, 0][0, 0, 0, 2, 2, 2, 0]
+2022-05-04 20:20:48,410 DEBUG __main__ Checking ideal list CTO Myranda Sawyer
+2022-05-04 20:20:48,410 DEBUG __main__ Getting schedule for Myranda Sawyer
+2022-05-04 20:20:48,410 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:48,410 DEBUG __main__ Looking for matches with CTO Esther Torgerson
+2022-05-04 20:20:48,411 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,411 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,411 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,411 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,411 DEBUG __main__ Getting schedule for Esther Torgerson
+2022-05-04 20:20:48,411 DEBUG __main__ Test Schedule: [1, 1, 2, 1, 1, 1, 0][1, 1, 1, 2, 1, 1, 0]
+2022-05-04 20:20:48,411 DEBUG __main__ Looking for matches with CTO Megan Olson
+2022-05-04 20:20:48,412 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,412 DEBUG __main__ Comparing shifts: 1 3
+2022-05-04 20:20:48,412 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,412 DEBUG __main__ Looking for matches with CTO Devin Bond
+2022-05-04 20:20:48,412 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,412 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,412 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,413 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,413 DEBUG __main__ Getting schedule for Devin Bond
+2022-05-04 20:20:48,413 DEBUG __main__ Test Schedule: [1, 0, 1, 1, 1, 2, 1][1, 0, 0, 1, 2, 2, 1]
+2022-05-04 20:20:48,413 DEBUG __main__ Looking for matches with CTO Kelly Contreras
+2022-05-04 20:20:48,413 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,413 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,414 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,414 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,414 DEBUG __main__ Getting schedule for Kelly Contreras
+2022-05-04 20:20:48,414 DEBUG __main__ Test Schedule: [0, 0, 1, 1, 2, 2, 1][1, 0, 0, 1, 2, 2, 1]
+2022-05-04 20:20:48,414 DEBUG __main__ Looking for matches with CTO Ashley Garinger
+2022-05-04 20:20:48,414 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,414 DEBUG __main__ Comparing shifts: 1 1
+2022-05-04 20:20:48,415 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,415 DEBUG __main__ CTO shifts match, checking schedules
+2022-05-04 20:20:48,415 DEBUG __main__ Getting schedule for Ashley Garinger
+2022-05-04 20:20:48,415 DEBUG __main__ Test Schedule: [0, 0, 2, 2, 2, 2, 0][0, 0, 0, 2, 2, 2, 0]
+2022-05-04 20:20:48,415 DEBUG __main__ Looking for matches with CTO Myranda Sawyer
+2022-05-04 20:20:48,415 DEBUG __main__ Checking ideal list CTO: Esther Torgerson
+2022-05-04 20:20:48,415 DEBUG __main__ Getting schedule for Esther Torgerson
+2022-05-04 20:20:48,416 DEBUG __main__ Getting shift for Esther Torgerson
+2022-05-04 20:20:48,416 DEBUG __main__ Checking ideal list CTO: Megan Olson
+2022-05-04 20:20:48,416 DEBUG __main__ Getting schedule for Megan Olson
+2022-05-04 20:20:48,416 DEBUG __main__ Getting shift for Megan Olson
+2022-05-04 20:20:48,416 DEBUG __main__ Checking ideal list CTO: Devin Bond
+2022-05-04 20:20:48,416 DEBUG __main__ Getting schedule for Devin Bond
+2022-05-04 20:20:48,416 DEBUG __main__ Getting shift for Devin Bond
+2022-05-04 20:20:48,417 DEBUG __main__ Checking ideal list CTO: Kelly Contreras
+2022-05-04 20:20:48,417 DEBUG __main__ Getting schedule for Kelly Contreras
+2022-05-04 20:20:48,417 DEBUG __main__ Getting shift for Kelly Contreras
+2022-05-04 20:20:48,417 DEBUG __main__ Checking ideal list CTO: Ashley Garinger
+2022-05-04 20:20:48,417 DEBUG __main__ Getting schedule for Ashley Garinger
+2022-05-04 20:20:48,417 DEBUG __main__ Getting shift for Ashley Garinger
+2022-05-04 20:20:48,417 DEBUG __main__ Checking ideal list CTO: Myranda Sawyer
+2022-05-04 20:20:48,418 DEBUG __main__ Getting schedule for Myranda Sawyer
+2022-05-04 20:20:48,418 DEBUG __main__ Getting shift for Myranda Sawyer
+2022-05-04 20:20:51,052 DEBUG __main__ Selected match: q
