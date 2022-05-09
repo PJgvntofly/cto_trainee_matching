@@ -619,7 +619,7 @@ if __name__ == "__main__":
                 match_type = 0
                 while match_type not in [1,2,9]:
                     #Start while loop to get input and direct the app to the correct logic tree
-                    match_type = int(input("1 = Match trainee to CTO on any shift\n2 = Match Trainee to CTO on the Trainee's Currently Assigned Shift\n9 = Return to Main Menu"))
+                    match_type = int(input("1 = Match trainee to CTO on any shift\n2 = Match Trainee to CTO on the Trainee's Currently Assigned Shift\n9 = Return to Main Menu\n"))
                     print('\nWhich Trainee?\n')
                     for index, name in enumerate(trainee_list):
                         print(f'{index} {name.firstName} {name.lastName}')
@@ -667,8 +667,8 @@ if __name__ == "__main__":
                                         print('\nInvalid selection, returning to main menu\n\n')
                                     time.sleep(.75)
                                     choice = 0
-                        except (ValueError, IndexError):
-                            logger.exception(f'Invalid discipline entered. Input was: {training_discipline}')
+                        except (ValueError, IndexError) as err:
+                            logger.exception(f'Invalid discipline entered. Input was: {training_discipline}. {err}')
                             print(f'{training_discipline} is not valid. Please enter a number between 1 and 3.\nReturning to main menu\n')
                             time.sleep(.5)
                             choice = 0
@@ -731,7 +731,7 @@ if __name__ == "__main__":
                 update_choice = 0
                 while update_choice == 0:
                     print('\nUpdate Employee:\n')
-                    update_choice = int(input('1 = Toggle CTO assigned setting\n2 = Update Employee Shift\n3 = Update Employee Schedule\n4 = Update Employee Personality\n5 = Toggle CTO Break Status\n6 = Update Trainee Minimum Skill\n8 = Delete Employee\n9 = Main Menu\n'))
+                    update_choice = int(input('1 = Toggle CTO assigned setting\n2 = Update Employee Shift\n3 = Update Employee Schedule\n4 = Update Employee Personality\n5 = Toggle CTO Break Status\n6 = Update Trainee Minimum Skill\n7 = Update Employee Disciplines\n8 = Delete Employee\n9 = Main Menu\n'))
                     #Update CTO assigned setting
                     if update_choice == 1:
                         logger.debug('Toggle CTO assigned value selected')
@@ -877,6 +877,40 @@ if __name__ == "__main__":
                             print('\nInvalid selection\n')
                             time.sleep(.5)
                             break
+                    #Update employee disciplines
+                    if update_choice == 7:
+                        print('\nUpdate employee disciplines\n')
+                        logger.info('Update employee disciplines selected')
+                        for index, employee in enumerate(loaded_list):
+                            print(f'{index} - {employee.firstName} {employee.lastName}')
+                        try:
+                            employee_selection = int(input('\nSelect the employee to update:\n'))
+                            employee_selection = loaded_list[employee_selection]
+                            logger.debug(f'Selected employee is {employee_selection.firstName} {employee_selection.lastName}')
+                            print(f'Discipline Settings for {employee_selection.firstName} {employee_selection.lastName}:\n1 - Call Taking - {employee_selection.calltaking}\n2 -   Police    - {employee_selection.police}\n3 -    Fire     - {employee_selection.fire}\n\n0 = Not signed off, 1 = Signed off\n')
+                            selection = int(input('Select discipline to update.\n'))
+                            logger.debug(f'Selected discipline: {selection}')
+                            if selection == 1:
+                                if employee_selection.calltaking == 0:
+                                    employee_selection.calltaking = 1
+                                else:
+                                    employee_selection.calltaking = 0
+                            if selection == 2:
+                                if employee_selection.police == 0:
+                                    employee_selection.police = 1
+                                else:
+                                    employee_selection.police = 0
+                            if selection == 3:
+                                if employee_selection.fire == 0:
+                                    employee_selection.fire = 1
+                                else:
+                                    employee_selection.fire = 0
+                            print('\nDiscipline successfully updated\n')
+                            time.sleep(.5)
+                            break
+                        except (ValueError, IndexError) as err:
+                            logger.exception(err)
+                            print('An error occured while attempting to update employee discipline. Please try again.\n')
                     #Delete employeee
                     if update_choice == 8:
                         logger.debug('Delete employee selected')
